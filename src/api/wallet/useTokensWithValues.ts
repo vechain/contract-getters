@@ -1,76 +1,79 @@
-import { useMemo } from 'react';
-import { useTokenBalances, WalletTokenBalance } from './useTokenBalances';
-import { useTokenPrices } from './useTokenPrices';
+import { useMemo } from "react";
+import { useTokenBalances, WalletTokenBalance } from "./useTokenBalances";
+import { useTokenPrices } from "./useTokenPrices";
 import {
-    SupportedCurrency,
-    convertToSelectedCurrency,
-} from '@utils/currencyUtils';
-import { useCurrency } from '@utils/useCurrency';
+  SupportedCurrency,
+  convertToSelectedCurrency,
+} from "@utils/currencyUtils";
+import { useCurrency } from "@utils/useCurrency";
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 export type TokenWithValue = WalletTokenBalance & {
-    priceUsd: number;
-    valueUsd: number;
-    valueInCurrency: number;
+  priceUsd: number;
+  valueUsd: number;
+  valueInCurrency: number;
 };
 
 type UseTokensWithValuesProps = {
-    networkType: NETWORK_TYPE;
-    address?: string;
+  networkType: NETWORK_TYPE;
+  address?: string;
 };
 
 export const useTokensWithValues = ({
-    networkType,
-    address = '',
+  networkType,
+  address = "",
 }: UseTokensWithValuesProps) => {
-    const { balances, isLoading: balancesLoading } = useTokenBalances({
-        networkType,
-        address,
+  const { balances, isLoading: balancesLoading } = useTokenBalances({
+    // @ts-ignore
+    thor: ThorClient,
+    networkType,
+    address,
+  });
+  const {
+    prices,
+    exchangeRates,
+    isLoading: pricesLoading,
+  } = useTokenPrices(networkType);
+  const { currentCurrency } = useCurrency();
+
+  const tokensWithValues = useMemo(() => {
+    return balances.map((token) => {
+      const priceUsd = prices[token.address] || 0;
+      const valueUsd = Number(token.balance) * priceUsd;
+      const valueInCurrency = convertToSelectedCurrency(
+        valueUsd,
+        currentCurrency as SupportedCurrency,
+        exchangeRates
+      );
+
+      return {
+        ...token,
+        priceUsd,
+        valueUsd,
+        valueInCurrency,
+      };
     });
-    const {
-        prices,
-        exchangeRates,
-        isLoading: pricesLoading,
-    } = useTokenPrices(networkType);
-    const { currentCurrency } = useCurrency();
+  }, [balances, prices, currentCurrency, exchangeRates]);
 
-    const tokensWithValues = useMemo(() => {
-        return balances.map((token) => {
-            const priceUsd = prices[token.address] || 0;
-            const valueUsd = Number(token.balance) * priceUsd;
-            const valueInCurrency = convertToSelectedCurrency(
-                valueUsd,
-                currentCurrency as SupportedCurrency,
-                exchangeRates,
-            );
+  // Get sorted tokens (by value)
+  const sortedTokens = useMemo(() => {
+    return [...tokensWithValues].sort(
+      (a, b) => b.valueInCurrency - a.valueInCurrency
+    );
+  }, [tokensWithValues]);
 
-            return {
-                ...token,
-                priceUsd,
-                valueUsd,
-                valueInCurrency,
-            };
-        });
-    }, [balances, prices, currentCurrency, exchangeRates]);
+  // Get tokens with positive balances
+  const tokensWithBalance = useMemo(() => {
+    return sortedTokens.filter((token) => Number(token.balance) > 0);
+  }, [sortedTokens]);
 
-    // Get sorted tokens (by value)
-    const sortedTokens = useMemo(() => {
-        return [...tokensWithValues].sort(
-            (a, b) => b.valueInCurrency - a.valueInCurrency,
-        );
-    }, [tokensWithValues]);
+  const isLoading = balancesLoading || pricesLoading;
 
-    // Get tokens with positive balances
-    const tokensWithBalance = useMemo(() => {
-        return sortedTokens.filter((token) => Number(token.balance) > 0);
-    }, [sortedTokens]);
-
-    const isLoading = balancesLoading || pricesLoading;
-
-    return {
-        tokens: tokensWithValues,
-        sortedTokens,
-        tokensWithBalance,
-        isLoading,
-    };
+  return {
+    tokens: tokensWithValues,
+    sortedTokens,
+    tokensWithBalance,
+    isLoading,
+  };
 };
