@@ -36,13 +36,13 @@ export const getVot3BalanceQueryKey = (address?: string) => [
 ];
 
 export const useGetVot3Balance = (
-    thorClient: ThorClient,
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     address?: string
 ) => {
     return useQuery({
         queryKey: getVot3BalanceQueryKey(address),
-        queryFn: async () => getVot3Balance(thorClient, networkType, address),
-        enabled: !!thorClient && !!address && !!networkType,
+        queryFn: async () => getVot3Balance(thor, networkType, address),
+        enabled: !!thor && !!address && !!networkType,
     });
 };

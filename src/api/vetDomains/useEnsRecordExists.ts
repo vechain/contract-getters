@@ -2,7 +2,6 @@ import { getConfig } from '@/config';
 import { NETWORK_TYPE } from '@/config/network';
 import { MockENS__factory } from '@contracts';
 import { useQuery } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { ThorClient } from '@vechain/sdk-network';
 import { concat, keccak256, toBytes } from 'viem';
 
@@ -40,10 +39,10 @@ export const getEnsRecordExistsQueryKey = (name: string) => [
 ];
 
 export const useEnsRecordExists = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     name: string
 ) => {
-    const thor = useThor();
 
     return useQuery({
         queryKey: getEnsRecordExistsQueryKey(name),

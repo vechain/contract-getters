@@ -1,28 +1,29 @@
 import { BigNumber } from 'bignumber.js';
 import { formatEther } from 'viem';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { useMemo } from 'react';
 import { getRoundRewardQueryKey } from '@thor/contracts/VoterRewards';
 import { VoterRewards__factory } from '@contracts';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 /**
  * useVotingRewards is a custom hook that fetches the voting rewards for a given round and voter.
  * It uses the mutli-clause reading to fetch the data in parallel for all rounds up to the current one.
  *
+ * @param {ThorClient} thor - thor client
  * @param {NETWORK_TYPE} networkType - network type
  * @param {string} currentRoundId - The id of the current round. If not provided, no queries will be made.
  * @param {string} voter - The address of the voter. If not provided, the rewards for all voters will be fetched.
  * @returns {object} An object containing the status and data of the queries. Refer to the react-query documentation for more details.
  */
 export const useVotingRewards = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     currentRoundId?: string,
     voter?: string
 ) => {
-    const thor = useThor();
     const queryClient = useQueryClient();
     const contractAddress = getConfig(networkType).voterRewardsContractAddress;
 

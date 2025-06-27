@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { SimpleAccountFactory__factory } from '@contracts';
-import { useThor } from '@vechain/dapp-kit-react';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from '@config/network';
 import { ThorClient } from '@vechain/sdk-network';
@@ -42,16 +41,16 @@ export const getHasV1SmartAccountQueryKey = (
 
 /**
  * Check if a smart account has a v1 smart account
+ * @param thor - thor client
  * @param network - network config
  * @param ownerAddress - The address of the owner of the smart account
  * @returns True if the smart account has a v1 smart account, false otherwise
  */
 export const useHasV1SmartAccount = (
+    thor: ThorClient,
     network: NetworkConfig,
     ownerAddress?: string,
 ) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getHasV1SmartAccountQueryKey(ownerAddress, network.type),
         queryFn: async () =>

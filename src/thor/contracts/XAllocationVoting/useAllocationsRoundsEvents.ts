@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { getAllEventLogs } from '@thor';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from '@config/network';
@@ -95,9 +94,10 @@ export const getAllocationsRoundsEventsQueryKey = () => [
  * Hook to get the allocation rounds events from the xAllocationVoting contract
  * @returns the allocation rounds events
  */
-export const useAllocationsRoundsEvents = (networkType: NETWORK_TYPE) => {
-    const thor = useThor();
-
+export const useAllocationsRoundsEvents = (
+    thor: ThorClient,
+    networkType: NETWORK_TYPE
+) => {
     return useQuery({
         queryKey: getAllocationsRoundsEventsQueryKey(),
         queryFn: async () =>

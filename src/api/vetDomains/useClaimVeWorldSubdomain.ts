@@ -14,8 +14,10 @@ import { ethers } from 'ethers';
 import { useWallet, useRefreshMetadata } from '@api/wallet';
 import { invalidateAndRefetchDomainQueries } from './utils/domainQueryUtils';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from '@vechain/sdk-network';
 
 type useClaimVeWorldSubdomainProps = {
+    thor: ThorClient;
     networkType: NETWORK_TYPE;
     subdomain: string;
     domain: string;
@@ -38,6 +40,7 @@ const ReverseRegistrarInterface = IReverseRegistrar__factory.createInterface();
  * This hook specializes in handling subdomains in the .veworld.vet domain
  */
 export const useClaimVeWorldSubdomain = ({
+    thor,
     networkType,
     subdomain,
     domain,
@@ -46,7 +49,7 @@ export const useClaimVeWorldSubdomain = ({
     alreadyOwned = false,
 }: useClaimVeWorldSubdomainProps): useClaimVeWorldSubdomainReturnValue => {
     const queryClient = useQueryClient();
-    const { account } = useWallet({ networkType });
+    const { account } = useWallet({ thor, networkType });
     const { refresh: refreshMetadata } = useRefreshMetadata(
         networkType,
         subdomain + '.' + domain,
@@ -180,6 +183,7 @@ export const useClaimVeWorldSubdomain = ({
     ]);
 
     const result = useSendTransaction({
+        thor,
         networkType,
         signerAccountAddress: account?.address ?? '',
         privyUIOptions: {

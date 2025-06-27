@@ -6,6 +6,7 @@ import {
 } from '@thor/contracts/X2EarnApps';
 import { useMemo } from 'react';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 export type MostVotedAppsInRoundReturnType = {
     percentage: number;
@@ -16,24 +17,27 @@ export type MostVotedAppsInRoundReturnType = {
 /**
  * Get the most voted apps in a round
  *
- * @param networkType
- * @param roundId the id of the round to get the most voted apps
+ * @param thor - thor client
+ * @param networkType - network type
+ * @param roundId - the id of the round to get the most voted apps
  * @returns a sorted array of the most voted apps in the round
  */
 export const useMostVotedAppsInRound = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     roundId?: string,
 ): { data: MostVotedAppsInRoundReturnType[]; isLoading: boolean } => {
     // get apps from round
-    const { data: roundXApps } = useRoundXApps(networkType, roundId);
+    const { data: roundXApps } = useRoundXApps(thor, networkType, roundId);
 
     // Notice: this trick is used because when starting the project in the local environment,
     // the roundId is "0" and the roundXApps is undefined, which will cause the app to not render apps info.
-    const { data: allXApps } = useXApps(networkType);
+    const { data: allXApps } = useXApps(thor, networkType);
     const apps = roundId === '0' ? allXApps?.active : roundXApps;
 
     // get shares of apps
     const xAppsShares = useXAppsShares(
+        thor,
         networkType,
         apps?.map((app) => app.id) ?? [],
         roundId,

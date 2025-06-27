@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { getXAppRoundEarningsQueryKey } from '@thor';
 import { getConfig } from '@config';
 import { XAllocationPool__factory } from '@/contracts';
 import { QueryClient } from '@tanstack/react-query';
 import { formatEther } from 'viem';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 export const getXAppTotalEarningsQueryKey = (
     tillRoundId: string | number,
@@ -20,19 +20,20 @@ export const getXAppTotalEarningsQueryKey = (
 ];
 /**
  * Total earnings of an xApp in multiple rounds
- * @param queryClient
- * @param networkType
- * @param roundIds ids of the rounds
- * @param appId id of the xApp
+ * @param thor - thor client
+ * @param queryClient - query client
+ * @param networkType - network type
+ * @param roundIds - ids of the rounds
+ * @param appId - id of the xApp
  * @returns the total earnings of the xApp until the last round
  */
 export const useXAppTotalEarnings = (
+    thor: ThorClient,
     queryClient: QueryClient,
     networkType: NETWORK_TYPE,
     roundIds: number[],
     appId: string
 ) => {
-    const thor = useThor();
     const lastRound = roundIds[roundIds.length - 1] ?? 0;
     return useQuery({
         queryKey: getXAppTotalEarningsQueryKey(lastRound, appId),

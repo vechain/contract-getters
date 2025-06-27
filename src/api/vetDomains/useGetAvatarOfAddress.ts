@@ -3,6 +3,7 @@ import { useGetAvatar } from './useGetAvatar';
 import { getPicassoImage } from '@utils';
 import { useVechainDomain } from './useVechainDomain';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 export const getAvatarOfAddressQueryKey = (address?: string) => [
     'VECHAIN_KIT',
@@ -14,16 +15,18 @@ export const getAvatarOfAddressQueryKey = (address?: string) => [
 /**
  * Hook to fetch the avatar for an address by first getting their domains
  * and then fetching the avatar for the first domain found
+ * @param thor - thor client
  * @param networkType
  * @param address The owner's address
  * @returns The avatar URL for the address's primary domain
  */
 export const useGetAvatarOfAddress = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     address?: string
 ) => {
     // First, get all domains for this address
-    const domainsQuery = useVechainDomain(networkType, address);
+    const domainsQuery = useVechainDomain(thor, networkType, address);
 
     // Then, get the avatar for the first domain, but only if we have one
     const primaryDomain = domainsQuery.data?.domain;

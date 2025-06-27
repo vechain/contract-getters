@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from '@config/network';
 import { XAllocationPool__factory } from '@contracts';
@@ -58,20 +57,20 @@ export const getXAppRoundEarningsQueryKey = (
 /**
  * Get the amount of $B3TR an xApp can claim from an allocation round
  *
- * @param queryClient react query client
- * @param networkType network type
- * @param roundId the round id
- * @param xAppId the xApp id
+ * @param thor - thor client
+ * @param queryClient - react query client
+ * @param networkType - network type
+ * @param roundId - the round id
+ * @param xAppId - the xApp id
  * @returns amount of $B3TR an xApp can claim from an allocation round
  */
 export const useXAppRoundEarnings = (
+    thor: ThorClient,
     queryClient: QueryClient,
     networkType: NETWORK_TYPE,
     roundId: string,
     xAppId: string
 ) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getXAppRoundEarningsQueryKey(roundId, xAppId),
         queryFn: async () => {
@@ -97,20 +96,20 @@ export const useXAppRoundEarnings = (
 
 /**
  *  Get the amount of $B3TR every xApp earned from an allocation round
+ * @param thor - thor client
  * @param queryClient - react query client
  * @param networkType - network type
- * @param roundId  the round id
- * @param xAppIds  the xApp ids
+ * @param roundId - the round id
+ * @param xAppIds - the xApp ids
  * @returns  the amount of $B3TR every xApp earned from an allocation round
  */
 export const useMultipleXAppRoundEarnings = (
+    thor: ThorClient,
     queryClient: QueryClient,
     networkType: NETWORK_TYPE,
     roundId: string,
     xAppIds: string[],
 ) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getXAppRoundEarningsQueryKey(roundId, 'ALL'),
         queryFn: async () => {

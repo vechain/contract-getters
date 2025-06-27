@@ -3,7 +3,6 @@ import { getConfig } from '@/config';
 import { ThorClient } from '@vechain/sdk-network';
 import { NETWORK_TYPE } from '@/config/network';
 import { IVechainEnergyOracleV1__factory } from '@contracts';
-import { useThor } from '@vechain/dapp-kit-react';
 import { useQuery } from '@tanstack/react-query';
 import BigNumber from 'bignumber.js';
 
@@ -45,8 +44,10 @@ const tokens = ['VET', 'VTHO', 'B3TR', 'EUR', 'GBP'] as SupportedToken[];
   [ 1353980000000n, 1748167036n ],
   [ 1140100000000n, 1748248579n ]
 ] */
-export const useTokenPrices2 = (networkType: NETWORK_TYPE) => {
-    const thor = useThor();
+export const useTokenPrices2 = (
+    thor: ThorClient,
+    networkType: NETWORK_TYPE
+) => {
     const config = getConfig(networkType);
 
     return useQuery({

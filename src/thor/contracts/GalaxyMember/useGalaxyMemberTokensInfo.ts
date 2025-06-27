@@ -1,8 +1,8 @@
 import { GalaxyMember__factory } from '@contracts';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 /**
  * Generates a query key for the getTokensInfoByOwner query.
@@ -16,18 +16,19 @@ export const getTokensInfoByOwnerQueryKey = (owner?: string | null) => [
 
 /**
  * Custom hook to fetch token information for a specific owner with infinite scrolling support.
+ * @param thor - thor client
  * @param networkType - network type
  * @param owner - The address of the token owner.
  * @param size - The number of tokens to fetch per page.
  * @returns An infinite query result containing the token information and pagination controls.
  */
 export const useGalaxyMemberTokensInfo = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     owner: string | null,
     size: number = 10,
 ) => {
     const contractAddress = getConfig(networkType).galaxyMemberContractAddress;
-    const thor = useThor();
 
     const fetchTokens = async ({ pageParam = 0 }) => {
         const data = await thor.contracts

@@ -6,15 +6,17 @@ import {
 } from '@api/vetDomains';
 import { convertUriToUrl } from '@utils';
 import { ENSRecords } from '@types';
+import { ThorClient } from "@vechain/sdk-network";
 
 export const useWalletMetadata = (
     address: string,
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
 ) => {
     const { data: domain, isLoading: isLoadingVechainDomain } =
-        useVechainDomain(networkType, address ?? '');
+        useVechainDomain(thor, networkType, address ?? '');
     const { data: avatar, isLoading: isLoadingMetadata } =
-        useGetAvatarOfAddress(networkType, address ?? '');
+        useGetAvatarOfAddress(thor, networkType, address ?? '');
     const { data: textRecords, isLoading: isLoadingRecords } =
         useGetTextRecords({ type: networkType }, domain?.domain ?? '');
     const headerUrl = textRecords?.header

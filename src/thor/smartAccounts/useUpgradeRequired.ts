@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { SimpleAccountFactory__factory } from '@contracts';
-import { useThor } from '@vechain/dapp-kit-react';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from '@config/network';
 import { ThorClient } from '@vechain/sdk-network';
@@ -47,6 +46,7 @@ export const getUpgradeRequiredQueryKey = (
 
 /**
  * Check if a smart account needs an upgrade (even if it's not yet deployed)
+ * @param thor - thor client
  * @param networkType - network type
  * @param accountAddress - The address of the smart account
  * @param ownerAddress - The address of the owner of the smart account
@@ -54,13 +54,12 @@ export const getUpgradeRequiredQueryKey = (
  * @returns True if the smart account needs an upgrade, false otherwise
  */
 export const useUpgradeRequired = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     accountAddress: string,
     ownerAddress: string,
     targetVersion: number,
 ) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getUpgradeRequiredQueryKey(
             accountAddress,

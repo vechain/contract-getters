@@ -36,13 +36,13 @@ export const getErc20BalanceQueryKey = (
 ) => ['VECHAIN_KIT', 'BALANCE', 'ERC20', tokenAddress, address];
 
 export const useGetErc20Balance = (
-    thorClient: ThorClient,
+    thor: ThorClient,
     tokenAddress: string,
     address?: string
 ) => {
     return useQuery({
         queryKey: getErc20BalanceQueryKey(tokenAddress, address),
-        queryFn: async () => getErc20Balance(thorClient, tokenAddress, address),
-        enabled: !!thorClient && !!address && !!tokenAddress,
+        queryFn: async () => getErc20Balance(thor, tokenAddress, address),
+        enabled: !!thor && !!address && !!tokenAddress,
     });
 };

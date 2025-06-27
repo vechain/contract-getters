@@ -3,6 +3,7 @@ import { NodeManagement__factory } from '@contracts';
 import { UseQueryResult } from '@tanstack/react-query';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from '@config/network';
+import { ThorClient } from "@vechain/sdk-network";
 
 const contractAbi = NodeManagement__factory.abi;
 const method = 'getUserNodes' as const;
@@ -32,11 +33,13 @@ export const getUserNodesQueryKey = (networkType: NETWORK_TYPE, user: string) =>
 
 /**
  * Hook to get delegation details for all nodes associated with a user
+ * @param thor
  * @param networkType
  * @param userInput - The address of the user to check
  * @returns An array of objects containing user node details
  */
 export const useGetUserNodes = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     userInput?: string,
 ): UseQueryResult<UserNode[], unknown> => {
@@ -59,6 +62,7 @@ export const useGetUserNodes = (
     //   ]
     // ]
     return useCallClause({
+        thor,
         address: contractAddress,
         abi: contractAbi,
         method,

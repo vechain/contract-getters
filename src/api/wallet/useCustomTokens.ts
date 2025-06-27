@@ -1,4 +1,3 @@
-import { useThor } from '@vechain/dapp-kit-react';
 import {
     CustomTokenInfo,
     getTokenInfo,
@@ -10,13 +9,16 @@ import {
 import { compareAddresses } from '@utils';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
-export const useCustomTokens = (networkType: NETWORK_TYPE) => {
+export const useCustomTokens = (
+    thor: ThorClient,
+    networkType: NETWORK_TYPE
+) => {
     const [customTokens, setCustomTokens] = useLocalStorage<CustomTokenInfo[]>(
         LocalStorageKey.CUSTOM_TOKENS,
         [],
     );
-    const thor = useThor();
 
     const addToken = async (address: CustomTokenInfo['address']) => {
         if (!isTokenIncluded(address) && !isDefaultToken(address)) {

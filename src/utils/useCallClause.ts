@@ -1,11 +1,11 @@
 import { executeCallClause, ViewFunctionResult } from '@utils/thorUtils';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import {
     ExtractAbiFunctionNames,
     AbiParametersToPrimitiveTypes,
 } from 'abitype';
 import { Abi } from 'viem';
+import { ThorClient } from "@vechain/sdk-network";
 
 export * from '@/utils/thorUtils';
 
@@ -43,12 +43,14 @@ export const useCallClause = <
     TMethod extends ExtractAbiFunctionNames<TAbi, 'pure' | 'view'>,
     TData = ViewFunctionResult<TAbi, TMethod>,
 >({
+    thor,
     address,
     abi,
     method,
     args,
     queryOptions,
 }: {
+    thor: ThorClient;
     address: string;
     abi: TAbi;
     method: TMethod;
@@ -66,8 +68,6 @@ export const useCallClause = <
         'queryKey' | 'queryFn'
     >;
 }) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getCallClauseQueryKey<TAbi>({
             address,

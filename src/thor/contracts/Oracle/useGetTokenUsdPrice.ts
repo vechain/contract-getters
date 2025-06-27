@@ -1,6 +1,5 @@
 import { BigNumber } from 'bignumber.js';
 import { useQuery } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { IVechainEnergyOracleV1__factory } from '@contracts';
 import { ThorClient } from '@vechain/sdk-network';
 import { getConfig } from '@config';
@@ -41,11 +40,10 @@ export const getTokenUsdPriceQueryKey = (token: SupportedToken) => [
 ];
 
 export const useGetTokenUsdPrice = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     token: SupportedToken
 ) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getTokenUsdPriceQueryKey(token),
         queryFn: async () => getTokenUsdPrice(thor, token, networkType),

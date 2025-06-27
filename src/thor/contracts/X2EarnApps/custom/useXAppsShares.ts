@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { XAllocationPool__factory } from '@contracts';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from "@config/network";
-import { useThor } from '@vechain/dapp-kit-react';
+import { ThorClient } from "@vechain/sdk-network";
 
 /**
  *  Returns the query key for the shares of multiple xApps in an allocation round.
@@ -17,19 +17,19 @@ export const getXAppsSharesQueryKey = (roundId?: number | string) => [
 
 /**
  * Fetch shares of multiple xApps in an allocation round
- * @param networkType
- * @param apps  the xApps to get the shares for
- * @param roundId  the round id to get the shares for
+ * @param thor - thor client
+ * @param networkType - network type
+ * @param apps - the xApps to get the shares for
+ * @param roundId - the round id to get the shares for
  * @returns  the shares (% of allocation pool) for the xApps in the round { allocated: number, unallocated: number }
  *
  */
 export const useXAppsShares = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     apps: string[],
     roundId?: string
 ) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getXAppsSharesQueryKey(roundId),
         queryFn: async () => {

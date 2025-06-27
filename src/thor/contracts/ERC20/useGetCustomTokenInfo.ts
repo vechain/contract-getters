@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { ERC20__factory } from '@contracts';
 import { ThorClient } from '@vechain/sdk-network';
-import {NETWORK_TYPE} from "@config/network";
+import { NETWORK_TYPE } from "@config/network";
 
 export type CustomTokenInfo = {
     name: string;
@@ -46,10 +45,10 @@ export const getCustomTokenInfo = (tokenAddress: string) => [
 ];
 
 export const useGetCustomTokenInfo = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     tokenAddress: string
 ) => {
-    const thor = useThor();
 
     return useQuery({
         queryKey: getCustomTokenInfo(tokenAddress),

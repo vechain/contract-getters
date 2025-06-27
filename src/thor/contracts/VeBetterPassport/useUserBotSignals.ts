@@ -2,6 +2,7 @@ import { getCallClauseQueryKey, useCallClause } from '@utils';
 import { getConfig } from '@config';
 import { VeBetterPassport__factory } from '@contracts';
 import { NETWORK_TYPE } from '@config/network';
+import { ThorClient } from '@vechain/sdk-network';
 
 const contractAbi = VeBetterPassport__factory.abi;
 const method = 'signaledCounter' as const;
@@ -25,11 +26,13 @@ export const getUserBotSignalsQueryKey = (
 
 /**
  * Hook to get the user bot signals (signaledCounter) from the VeBetterPassport contract.
+ * @param thor - The ThorClient instance.
  * @param networkType - network type
  * @param userAddressInput - The user address.
  * @returns The user bot signals
  */
 export const useUserBotSignals = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     userAddressInput?: string
 ) => {
@@ -39,6 +42,7 @@ export const useUserBotSignals = (
 
     // VeBetter Passport user bot signals result: [ 1n ]
     return useCallClause({
+        thor,
         address: veBetterPassportContractAddress,
         abi: contractAbi,
         method,
@@ -47,7 +51,8 @@ export const useUserBotSignals = (
             enabled:
                 !!userAddressInput &&
                 !!veBetterPassportContractAddress &&
-                !!networkType,
+                !!networkType &&
+                !!thor,
             select: (res) => Number(res[0]),
         },
     });

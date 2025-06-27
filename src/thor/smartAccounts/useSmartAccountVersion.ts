@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { SimpleAccountFactory__factory } from '@contracts';
 import { ThorClient } from '@vechain/sdk-network';
 import { executeCallClause } from '@utils';
-import { useThor } from '@vechain/dapp-kit-react'
 
 const abi = SimpleAccountFactory__factory.abi;
 const method = 'version' as const;
@@ -35,9 +34,10 @@ export const getVersionQueryKey = (contractAddress?: string) => [
  * Get the version of the smart account
  * @returns The version of the smart account
  */
-export const useSmartAccountVersion = (contractAddress?: string) => {
-    const thor = useThor();
-
+export const useSmartAccountVersion = (
+    thor: ThorClient,
+    contractAddress?: string
+) => {
     return useQuery({
         queryKey: getVersionQueryKey(contractAddress),
         queryFn: async () => getVersion(thor, contractAddress),

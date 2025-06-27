@@ -3,6 +3,7 @@ import { useCallClause, getCallClauseQueryKey } from '@utils';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from '@config/network';
 import { ZERO_ADDRESS } from '@vechain/sdk-core';
+import { ThorClient } from '@vechain/sdk-network';
 
 const contractAbi = VeBetterPassport__factory.abi;
 const method = 'isPersonAtTimepoint' as const;
@@ -30,6 +31,7 @@ export const getIsPersonAtTimepointQueryKey = (
 
 /**
  * Hook to get the isPerson status from the VeBetterPassport contract at a specific timepoint.
+ * @param thor - The ThorClient instance.
  * @param networkType
  * @param user - The user address.
  * @param timepoint - The block number (as a string or number).
@@ -37,6 +39,7 @@ export const getIsPersonAtTimepointQueryKey = (
  * @returns The isPerson status (boolean) at a given block number.
  */
 export const useIsPersonAtTimepoint = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     user?: string,
     timepoint?: string,
@@ -48,6 +51,7 @@ export const useIsPersonAtTimepoint = (
 
     // VeBetter Passport is person at timepoint result: [ false, 'User has been signaled too many times' ]
     return useCallClause({
+        thor,
         abi: contractAbi,
         address: veBetterPassportContractAddress,
         method,
@@ -61,7 +65,8 @@ export const useIsPersonAtTimepoint = (
                 timepoint !== undefined &&
                 customEnabled &&
                 !!veBetterPassportContractAddress &&
-                !!networkType,
+                !!networkType &&
+                !!thor,
             select: (data) => data[0],
         },
     });

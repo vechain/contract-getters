@@ -10,8 +10,10 @@ import { getConfig } from '@config';
 import { humanAddress } from '@utils';
 import { invalidateAndRefetchDomainQueries } from './utils/domainQueryUtils';
 import {NETWORK_TYPE} from "@config/network";
+import { ThorClient } from '@vechain/sdk-network';
 
 type useUnsetDomainProps = {
+    thor: ThorClient;
     networkType: NETWORK_TYPE;
     onSuccess?: () => void;
     onError?: () => void;
@@ -30,12 +32,13 @@ const ReverseRegistrarInterface = IReverseRegistrar__factory.createInterface();
  * that was previously part of the claim hooks.
  */
 export const useUnsetDomain = ({
+    thor,
     networkType,
     onSuccess,
     onError,
 }: useUnsetDomainProps): useUnsetDomainReturnValue => {
     const queryClient = useQueryClient();
-    const { account } = useWallet({ networkType });
+    const { account } = useWallet({ thor, networkType });
 
     const buildClauses = useCallback(async () => {
         const clausesArray: any[] = [];
@@ -74,6 +77,7 @@ export const useUnsetDomain = ({
     }, [onSuccess, queryClient, account, networkType]);
 
     const result = useSendTransaction({
+        thor,
         signerAccountAddress: account?.address ?? '',
         privyUIOptions: {
             title: 'Sign to unset your VeChain nickname',

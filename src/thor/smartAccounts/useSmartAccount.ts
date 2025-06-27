@@ -4,7 +4,6 @@ import { ThorClient } from '@vechain/sdk-network';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from '@config/network';
 import { SimpleAccountFactory__factory } from '@contracts';
-import { useThor } from '@vechain/dapp-kit-react';
 
 export interface SmartAccountReturnType {
     address: string | undefined;
@@ -48,11 +47,10 @@ export const getSmartAccountQueryKey = (ownerAddress?: string) => {
 };
 
 export const useSmartAccount = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     ownerAddress?: string
 ) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getSmartAccountQueryKey(ownerAddress),
         queryFn: () => getSmartAccount(thor, networkType, ownerAddress),

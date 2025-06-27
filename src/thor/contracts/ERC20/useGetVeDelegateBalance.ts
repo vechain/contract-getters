@@ -39,13 +39,13 @@ export const getVeDelegateBalanceQueryKey = (address?: string) => [
 ];
 
 export const useGetVeDelegateBalance = (
-    thorClient: ThorClient,
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     address?: string
 ) => {
     return useQuery({
         queryKey: getVeDelegateBalanceQueryKey(address),
-        queryFn: async () => getVeDelegateBalance(thorClient, networkType, address),
-        enabled: !!thorClient && !!address && !!networkType,
+        queryFn: async () => getVeDelegateBalance(thor, networkType, address),
+        enabled: !!thor && !!address && !!networkType,
     });
 };

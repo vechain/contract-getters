@@ -18,6 +18,7 @@ import { NETWORK_TYPE } from '@config/network';
 import { useAccount } from 'wagmi';
 import { useCallback, useEffect, useState } from 'react';
 import { useWalletMetadata } from './useWalletMetadata';
+import { ThorClient } from "@vechain/sdk-network";
 // import { usePrivyCrossAppSdk } from '@/providers/PrivyCrossAppProvider';    // TODO: ??
 
 export type UseWalletReturnType = {
@@ -55,6 +56,7 @@ export type UseWalletReturnType = {
 };
 
 export type WalletConfig = {
+    thor: ThorClient;
     networkType: NETWORK_TYPE;
     delegatorUrl?: string;
     privyAppId?: string;
@@ -70,7 +72,7 @@ export const useWallet = (config: WalletConfig): UseWalletReturnType => {
     // const { logout: disconnectCrossApp } = usePrivyCrossAppSdk();
     const { loading: isLoadingLoginOAuth } = useLoginWithOAuth({});
     const { user, authenticated, logout, ready } = usePrivy();
-    const { data: chainId } = useGetChainId();
+    const { data: chainId } = useGetChainId(config.thor);
     const { account: dappKitAccount, disconnect: dappKitDisconnect } =
         useDAppKitWallet();
 
@@ -81,7 +83,8 @@ export const useWallet = (config: WalletConfig): UseWalletReturnType => {
     const nodeUrl = useGetNodeUrl({ type: config.networkType });
 
     // Connection states
-    const isConnectedWithDappKit = !!dappKitAccount;
+    // const isConnectedWithDappKit = !!dappKitAccount;
+    const isConnectedWithDappKit = false
     const isConnectedWithSocialLogin = authenticated && !!user;
     const isConnectedWithPrivy =
         isConnectedWithSocialLogin || isConnectedWithCrossApp;
@@ -156,7 +159,7 @@ export const useWallet = (config: WalletConfig): UseWalletReturnType => {
         : privyEmbeddedWalletAddress;
 
     // Get smart account
-    const { data: smartAccount } = useSmartAccount(config.networkType, connectedWalletAddress);
+    const { data: smartAccount } = useSmartAccount(config.thor, config.networkType, connectedWalletAddress);
 
     // TODO: here we will need to check if the owner of the wallet owns a smart account
     const activeAddress = isConnectedWithDappKit
@@ -165,15 +168,18 @@ export const useWallet = (config: WalletConfig): UseWalletReturnType => {
 
     const activeAccountMetadata = useWalletMetadata(
         activeAddress ?? '',
+        config.thor,
         config.networkType,
     );
 
     const connectedMetadata = useWalletMetadata(
         connectedWalletAddress ?? '',
+        config.thor,
         config.networkType,
     );
     const smartAccountMetadata = useWalletMetadata(
         smartAccount?.address ?? '',
+        config.thor,
         config.networkType,
     );
 
@@ -199,6 +205,7 @@ export const useWallet = (config: WalletConfig): UseWalletReturnType => {
 
     // Get smart account version
     const { data: smartAccountVersion } = useSmartAccountVersion(
+        config.thor,
         smartAccount?.address ?? '',
     );
 

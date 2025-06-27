@@ -5,7 +5,6 @@ import { getConfig } from '@config';
 import { NETWORK_TYPE } from '@config/network';
 import { FilterCriteria, ThorClient } from '@vechain/sdk-network';
 import { compareAddresses } from '@utils';
-import { useThor } from '@vechain/dapp-kit-react';
 
 export type AllocationVoteCastEvent = {
     voter: string;
@@ -105,12 +104,11 @@ export const getUserVotesInRoundQueryKey = (
  * @returns the user votes in a given round from the xAllocationVoting contract
  */
 export const useUserVotesInRound = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     roundId?: string,
     address?: string
 ) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getUserVotesInRoundQueryKey(roundId, address),
         queryFn: async () => {
@@ -145,11 +143,11 @@ export const getVotesInRoundQueryKey = (roundId?: string) => [
  * @returns  the allocation rounds events (i.e the proposals created)
  */
 export const useVotesInRound = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     roundId?: string,
     enabled = true
 ) => {
-    const thor = useThor();
     return useQuery({
         queryKey: getVotesInRoundQueryKey(roundId),
         queryFn: async () =>

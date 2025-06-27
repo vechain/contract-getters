@@ -12,9 +12,9 @@ export type TokenWithBalance = CustomTokenInfo & TokenBalance;
 
 /**
  *  Get the b3tr balance of an address from the contract
- * @param thor  The thor instance
- * @param network  The network type
- * @param address  The address to get the balance of. If not provided, will return an error (for better react-query DX)
+ * @param thor - The thor instance
+ * @param token - custom token into
+ * @param address - The address to get the balance of. If not provided, will return an error (for better react-query DX)
  * @returns Balance of the token in the form of {@link TokenBalance} (original, scaled down and formatted)
  */
 export const getCustomTokenBalance = async (
@@ -46,17 +46,17 @@ export const getCustomTokenBalanceQueryKey = (
 ) => ['VECHAIN_KIT_BALANCE', address, 'CUSTOM_TOKEN', tokenAddress];
 
 export const useGetCustomTokenBalances = (
-    thorClient: ThorClient,
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     address?: string
 ) => {
-    const { customTokens } = useCustomTokens(networkType);
+    const { customTokens } = useCustomTokens(thor, networkType);
 
     return useQueries({
         queries: customTokens.map((token) => ({
             queryKey: getCustomTokenBalanceQueryKey(token.address, address),
             queryFn: async () => {
-                return await getCustomTokenBalance(thorClient, token, address);
+                return await getCustomTokenBalance(thor, token, address);
             },
         })),
     });

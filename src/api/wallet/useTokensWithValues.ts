@@ -16,17 +16,18 @@ export type TokenWithValue = WalletTokenBalance & {
 };
 
 type UseTokensWithValuesProps = {
+  thor: ThorClient;
   networkType: NETWORK_TYPE;
   address?: string;
 };
 
 export const useTokensWithValues = ({
+  thor,
   networkType,
   address = "",
 }: UseTokensWithValuesProps) => {
   const { balances, isLoading: balancesLoading } = useTokenBalances({
-    // @ts-ignore
-    thor: ThorClient,
+    thor,
     networkType,
     address,
   });
@@ -34,7 +35,7 @@ export const useTokensWithValues = ({
     prices,
     exchangeRates,
     isLoading: pricesLoading,
-  } = useTokenPrices(networkType);
+  } = useTokenPrices(thor, networkType);
   const { currentCurrency } = useCurrency();
 
   const tokensWithValues = useMemo(() => {

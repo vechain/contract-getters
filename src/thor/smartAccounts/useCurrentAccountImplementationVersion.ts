@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { SimpleAccountFactory__factory } from '@contracts';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from '@config/network';
-import { useThor } from '@vechain/dapp-kit-react';
 import { ThorClient } from '@vechain/sdk-network';
 import { NetworkConfig } from "@types";
 
@@ -40,9 +39,9 @@ export const getCurrentAccountImplementationVersionQueryKey = (
  * @returns The current account implementation version
  */
 export const useCurrentAccountImplementationVersion = (
+    thor: ThorClient,
     network: NetworkConfig,
 ) => {
-    const thor = useThor();
 
     return useQuery({
         queryKey: getCurrentAccountImplementationVersionQueryKey(network.type),

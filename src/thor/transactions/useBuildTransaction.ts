@@ -61,6 +61,7 @@ export const useBuildTransaction = <ClausesParams>({
     }, [invalidateCache, onSuccess, queryClient, refetchQueryKeys]);
 
     const result = useSendTransaction({
+        thor: walletConfig.thor,
         signerAccountAddress: account?.address,
         onTxConfirmed: handleOnSuccess,
         suggestedMaxGas,

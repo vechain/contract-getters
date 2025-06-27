@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { SimpleAccountFactory__factory } from '@contracts';
-import { useThor } from '@vechain/dapp-kit-react';
 import { NETWORK_TYPE } from '@config/network';
 import { getConfig } from '@config';
 import { ThorClient } from '@vechain/sdk-network';
@@ -59,16 +58,16 @@ export const getAccountImplementationAddressQueryKey = (
 
 /**
  * Get the address of a smart account implementation for a given version
+ * @param thor - thor client
  * @param network - network config
  * @param version - The version of the smart account implementation
  * @returns The address of the smart account implementation
  */
 export const useAccountImplementationAddress = (
+    thor: ThorClient,
     network: NetworkConfig,
     version?: number
 ) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getAccountImplementationAddressQueryKey(
             version,

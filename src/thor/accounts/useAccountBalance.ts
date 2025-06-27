@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { Address } from '@vechain/sdk-core';
 import { ThorClient } from '@vechain/sdk-network';
 import { formatEther } from 'viem';
@@ -20,11 +19,14 @@ export const getAccountBalanceQueryKey = (address?: string) => [
 
 /**
  *  Get the account balance for the given address
+ * @param thor - Thor client
  * @param address  The address of the account to get the balance for
  * @returns  The account balance
  */
-export const useAccountBalance = (address?: string) => {
-    const thor = useThor();
+export const useAccountBalance = (
+    thor: ThorClient,
+    address?: string
+) => {
     return useQuery({
         queryKey: getAccountBalanceQueryKey(address),
         queryFn: () => getAccountBalance(thor, address),

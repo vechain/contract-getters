@@ -2,6 +2,7 @@ import { getConfig } from '@/config';
 import { useCallClause } from '@utils';
 import { namehash } from 'viem';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 const nameInterfaceAbi = [
     {
@@ -33,15 +34,18 @@ export const getResolverAddressQueryKey = (domain?: string) => [
 
 /**
  * Hook to get resolver address for a VET domain
+ * @param thor - thor client
  * @param networkType
  * @param domain The domain to get resolver for
  * @returns The resolver address for the domain
  */
 export const useGetResolverAddress = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     domain?: string
 ) => {
     return useCallClause({
+        thor,
         address: getConfig(networkType).vetDomainsContractAddress,
         abi: nameInterfaceAbi,
         method: 'resolver',

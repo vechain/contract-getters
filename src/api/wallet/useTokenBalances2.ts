@@ -1,6 +1,5 @@
 import { formatEther } from 'ethers';
 import { useQueries } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { ThorClient } from '@vechain/sdk-network';
 import { getConfig } from '@config';
 import { useCustomTokens } from '@api/wallet';
@@ -11,6 +10,7 @@ import { NETWORK_TYPE } from '@config/network';
 import { IB3TR__factory, IERC20__factory, IVOT3__factory } from '@contracts';
 
 type UseTokenBalancesProps = {
+    thor: ThorClient;
     networkType: NETWORK_TYPE;
     address: string;
 };
@@ -123,11 +123,11 @@ const getTokenBalances = async (
 };
 
 export const useTokenBalances2 = ({
+    thor,
     networkType,
     address
 }: UseTokenBalancesProps) => {
-    const thor = useThor();
-    const { customTokens } = useCustomTokens(networkType);
+    const { customTokens } = useCustomTokens(thor, networkType);
 
     return useQueries({
         queries: [

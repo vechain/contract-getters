@@ -7,7 +7,7 @@ import {
     useGetErc20Balance,
     useGetCustomTokenBalances,
 } from '@thor';
-import { getConfig } from '@/config';
+import { getConfig } from '@config';
 import { NETWORK_TYPE } from "@config/network";
 import { ThorClient } from '@vechain/sdk-network';
 
@@ -18,7 +18,7 @@ export type WalletTokenBalance = {
 };
 
 type UseTokenBalancesProps = {
-    thorClient: ThorClient;
+    thor: ThorClient;
     networkType: NETWORK_TYPE;
     address?: string;
 };
@@ -26,25 +26,25 @@ type UseTokenBalancesProps = {
 // TODO: migration check if we can remove hooks inside and bundle this into one query using thor.transactions.executeMultipleClausesCall
 // check example of useTokenBalances2
 export const useTokenBalances = ({
-    thorClient,
+    thor,
     networkType,
     address = '',
 }: UseTokenBalancesProps) => {
     const config = getConfig(networkType);
 
     // Base token balances
-    const { data: vetData, isLoading: vetLoading } = useAccountBalance(address);
+    const { data: vetData, isLoading: vetLoading } = useAccountBalance(thor, address);
     const { data: b3trBalance, isLoading: b3trLoading } =
-        useGetB3trBalance(thorClient, networkType, address);
+        useGetB3trBalance(thor, networkType, address);
     const { data: vot3Balance, isLoading: vot3Loading } =
-        useGetVot3Balance(thorClient, networkType, address);
+        useGetVot3Balance(thor, networkType, address);
     const { data: veDelegateBalance, isLoading: veDelegateLoading } =
-        useGetVeDelegateBalance(thorClient, networkType, address);
+        useGetVeDelegateBalance(thor, networkType, address);
     const { data: gloDollarBalance, isLoading: gloDollarLoading } =
-        useGetErc20Balance(thorClient, config.gloDollarContractAddress, address);
+        useGetErc20Balance(thor, config.gloDollarContractAddress, address);
 
     // Custom token balances
-    const customTokenBalancesQueries = useGetCustomTokenBalances(thorClient, networkType, address);
+    const customTokenBalancesQueries = useGetCustomTokenBalances(thor, networkType, address);
     const customTokenBalances = customTokenBalancesQueries
         .map((query) => query.data)
         .filter(Boolean);

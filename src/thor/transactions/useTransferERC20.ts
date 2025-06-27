@@ -9,8 +9,10 @@ import { useQueryClient } from '@tanstack/react-query';
 import { humanAddress, isValidAddress } from '@utils';
 import { parseEther } from 'viem';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from '@vechain/sdk-network';
 
 type useTransferERC20Props = {
+    thor: ThorClient;
     networkType: NETWORK_TYPE;
     fromAddress: string;
     receiverAddress: string;
@@ -29,6 +31,7 @@ type useTransferERC20ReturnValue = {
 const ERC20Interface = ERC20__factory.createInterface();
 
 export const useTransferERC20 = ({
+    thor,
     fromAddress,
     receiverAddress,
     amount,
@@ -39,7 +42,7 @@ export const useTransferERC20 = ({
     onError,
 }: useTransferERC20Props): useTransferERC20ReturnValue => {
     const queryClient = useQueryClient();
-    const { refresh } = useRefreshBalances(networkType);
+    const { refresh } = useRefreshBalances(thor, networkType);
 
     const buildClauses = useCallback(async () => {
         if (!receiverAddress || !amount || !isValidAddress(receiverAddress))
@@ -68,6 +71,7 @@ export const useTransferERC20 = ({
     }, [onSuccess, fromAddress, queryClient]);
 
     const result = useSendTransaction({
+        thor,
         signerAccountAddress: fromAddress,
         privyUIOptions: {
             title: 'Confirm Transfer',

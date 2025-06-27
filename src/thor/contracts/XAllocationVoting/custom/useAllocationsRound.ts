@@ -9,6 +9,7 @@ import {
 } from '@thor';
 import { getConfig } from '@config';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 export type AllocationRoundWithState = RoundCreated & {
     state?: keyof typeof RoundState;
@@ -22,14 +23,15 @@ export type AllocationRoundWithState = RoundCreated & {
  * @returns the allocation round info see {@link AllocationRoundWithState}
  */
 export const useAllocationsRound = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     roundId?: string
 ) => {
-    const { data: currentBlock } = useCurrentBlock();
-    const currentAllocationId = useCurrentAllocationsRoundId(networkType);
-    const currentAllocationState = useAllocationsRoundState(networkType, roundId);
+    const { data: currentBlock } = useCurrentBlock(thor);
+    const currentAllocationId = useCurrentAllocationsRoundId(thor, networkType);
+    const currentAllocationState = useAllocationsRoundState(thor, networkType, roundId);
 
-    const allocationRoundsEvents = useAllocationsRoundsEvents(networkType);
+    const allocationRoundsEvents = useAllocationsRoundsEvents(thor, networkType);
 
     const currentAllocationRound: AllocationRoundWithState | undefined =
         useMemo(() => {
@@ -41,8 +43,8 @@ export const useAllocationsRound = (
             if (!roundInfo) return;
             return {
                 ...roundInfo,
-                state: currentAllocationState.data,
-                isCurrent: roundId === currentAllocationId.data,
+                state: (currentAllocationState.data as readonly [number] | undefined)?.[0] as keyof typeof RoundState,
+                isCurrent: roundId === currentAllocationId.data?.toString(),
             };
         }, [
             currentAllocationId,

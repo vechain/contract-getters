@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { SimpleAccountFactory__factory } from '@contracts';
-import { useThor } from '@vechain/dapp-kit-react';
 import { NETWORK_TYPE } from '@config/network';
 import { getConfig } from '@config';
 import { ThorClient } from '@vechain/sdk-network';
@@ -41,16 +40,16 @@ export const getAccountAddressQueryKey = (
 
 /**
  * Get the address of a smart account
+ * @param thor - thor client
  * @param network - network config
  * @param ownerAddress - The address of the owner of the smart account
  * @returns The address of the smart account
  */
 export const useGetAccountAddress = (
+    thor: ThorClient,
     network: NetworkConfig,
     ownerAddress?: string,
 ) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getAccountAddressQueryKey(ownerAddress, network.type),
         queryFn: async () =>

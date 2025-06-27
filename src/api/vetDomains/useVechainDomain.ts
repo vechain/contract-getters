@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { NETWORK_TYPE } from '@config/network';
 import { getConfig } from '@config';
 import { isAddress } from 'ethers';
@@ -136,10 +135,10 @@ export const getVechainDomainQueryKey = (addressOrDomain?: string | null) => [
 ];
 
 export const useVechainDomain = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     addressOrDomain?: string | null
 ) => {
-    const thor = useThor();
 
     return useQuery<VeChainDomainResult>({
         queryKey: getVechainDomainQueryKey(addressOrDomain),

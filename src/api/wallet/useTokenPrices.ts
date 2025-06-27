@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useGetTokenUsdPrice } from '@thor/contracts/Oracle';
 import { getConfig } from '@/config';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 export type ExchangeRates = {
     eurUsdPrice: number;
@@ -10,20 +11,20 @@ export type ExchangeRates = {
 
 // TODO: migration check if we can remove hooks inside and bundle this into one query using thor.transactions.executeMultipleClausesCall
 // check example in useTokenPrices2.ts
-export const useTokenPrices = (networkType: NETWORK_TYPE) => {
+export const useTokenPrices = (thor: ThorClient, networkType: NETWORK_TYPE) => {
     const config = getConfig(networkType);
 
     // Fetch base token prices
     const { data: vetUsdPrice, isLoading: vetUsdPriceLoading } =
-        useGetTokenUsdPrice(networkType, 'VET');
+        useGetTokenUsdPrice(thor, networkType, 'VET');
     const { data: vthoUsdPrice, isLoading: vthoUsdPriceLoading } =
-        useGetTokenUsdPrice(networkType, 'VTHO');
+        useGetTokenUsdPrice(thor, networkType, 'VTHO');
     const { data: b3trUsdPrice, isLoading: b3trUsdPriceLoading } =
-        useGetTokenUsdPrice(networkType, 'B3TR');
+        useGetTokenUsdPrice(thor, networkType, 'B3TR');
     const { data: eurUsdPrice, isLoading: eurToUsdLoading } =
-        useGetTokenUsdPrice(networkType, 'EUR');
+        useGetTokenUsdPrice(thor, networkType, 'EUR');
     const { data: gbpUsdPrice, isLoading: gbpToUsdLoading } =
-        useGetTokenUsdPrice(networkType, 'GBP');
+        useGetTokenUsdPrice(thor, networkType, 'GBP');
 
     // Get all prices as a map
     const prices = useMemo(() => {

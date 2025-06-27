@@ -2,6 +2,7 @@ import { getCallClauseQueryKey, useCallClause } from '@utils';
 import { X2EarnApps__factory } from '@contracts';
 import { NETWORK_TYPE } from '@config/network';
 import { getConfig } from '@config';
+import { ThorClient } from '@vechain/sdk-network';
 
 const abi = X2EarnApps__factory.abi;
 const method = 'baseURI' as const;
@@ -15,17 +16,20 @@ export const getXAppsMetadataBaseUriQueryKey = (network: NETWORK_TYPE) =>
 
 /**
  *  Hook to get the baseUri of the xApps metadata
+ * @param thor - The ThorClient instance.
+ * @param networkType - network type
  * @returns the baseUri of the xApps metadata
  */
-export const useXAppsMetadataBaseUri = (networkType: NETWORK_TYPE) => {
+export const useXAppsMetadataBaseUri = (thor: ThorClient, networkType: NETWORK_TYPE) => {
     // X2Earn Apps metadata base URI result: [ 'ipfs://' ]
     return useCallClause({
+        thor,
         abi,
         address: getConfig(networkType).x2EarnAppsContractAddress,
         method,
         args: [],
         queryOptions: {
-            enabled: !!networkType,
+            enabled: !!networkType && !!thor,
             staleTime: 1000 * 60 * 60, // 1 hour,
         },
     });

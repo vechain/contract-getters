@@ -6,14 +6,16 @@ import {
 } from '@utils/currencyUtils';
 import { useCurrency } from '@utils/useCurrency';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 type UseTotalBalanceProps = {
+    thor: ThorClient;
     networkType: NETWORK_TYPE;
     address?: string;
 };
 
-export const useTotalBalance = ({ networkType, address = '' }: UseTotalBalanceProps) => {
-    const { tokensWithBalance, isLoading } = useTokensWithValues({ networkType, address });
+export const useTotalBalance = ({ thor, networkType, address = '' }: UseTotalBalanceProps) => {
+    const { tokensWithBalance, isLoading } = useTokensWithValues({ thor, networkType, address });
     const { currentCurrency } = useCurrency();
 
     const totalBalanceInCurrency = useMemo(() => {

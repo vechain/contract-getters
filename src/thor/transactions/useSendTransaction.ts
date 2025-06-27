@@ -2,14 +2,13 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
-    useThor,
     useWallet as useDAppKitWallet,
 } from '@vechain/dapp-kit-react';
 import { TransactionStatus, TransactionStatusErrorType } from '@types';
 import { useGetNodeUrl } from '@utils';
 import { useTxReceipt, estimateTxGas } from '@thor';
 import { useWallet } from '@api/wallet';
-import { signerUtils, TransactionReceipt } from '@vechain/sdk-network';
+import { signerUtils, ThorClient, TransactionReceipt } from '@vechain/sdk-network';
 import { TransactionClause } from '@vechain/sdk-core';
 import { NETWORK_TYPE } from "@config/network";
 import { SignTypedDataParams } from "@privy-io/react-auth";
@@ -38,6 +37,7 @@ type PrivyWalletProviderContextType = {
  * @param suggestedMaxGas the suggested max gas for the transaction
  */
 type UseSendTransactionProps = {
+    thor: ThorClient;
     signerAccountAddress?: string | null;
     clauses?: TransactionClause[];
     onTxConfirmed?: () => void | Promise<void>;
@@ -110,6 +110,7 @@ export type UseSendTransactionReturnValue = {
  * @returns see {@link UseSendTransactionReturnValue}
  */
 export const useSendTransaction = ({
+    thor,
     signerAccountAddress,
     clauses,
     onTxConfirmed,
@@ -120,9 +121,8 @@ export const useSendTransaction = ({
     networkType,
     privyWalletProvider,
 }: UseSendTransactionProps): UseSendTransactionReturnValue => {
-    const thor = useThor();
     const { signer } = useDAppKitWallet();
-    const { connection } = useWallet({ networkType });
+    const { connection } = useWallet({ thor, networkType });
     const nodeUrl = useGetNodeUrl({ type: networkType });
 
     /**
@@ -246,7 +246,7 @@ export const useSendTransaction = ({
         data: txReceipt,
         isLoading: isTxReceiptLoading,
         error: txReceiptError,
-    } = useTxReceipt(txHash ?? '');
+    } = useTxReceipt(thor, txHash ?? '');
 
     /**
      * Explain the revert reason of the transaction

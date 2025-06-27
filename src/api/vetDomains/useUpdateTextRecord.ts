@@ -2,6 +2,7 @@ import { Interface, namehash } from 'ethers';
 import { useCallback } from 'react';
 import { UseSendTransactionReturnValue, useSendTransaction } from '@thor/transactions';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from '@vechain/sdk-network';
 
 const nameInterface = new Interface([
     'function resolver(bytes32 node) returns (address resolverAddress)',
@@ -15,6 +16,7 @@ type UpdateTextRecordVariables = {
 };
 
 type UseUpdateTextRecordProps = {
+    thor: ThorClient;
     networkType: NETWORK_TYPE;
     onSuccess?: () => void | Promise<void>;
     onError?: (error?: Error) => void | Promise<void>;
@@ -27,6 +29,7 @@ type UseUpdateTextRecordReturnValue = {
 } & Omit<UseSendTransactionReturnValue, 'sendTransaction'>;
 
 export const useUpdateTextRecord = ({
+    thor,
     onSuccess,
     onError,
     signerAccountAddress,
@@ -61,6 +64,7 @@ export const useUpdateTextRecord = ({
     );
 
     const result = useSendTransaction({
+        thor,
         signerAccountAddress,
         onTxConfirmed: async () => {
             await onSuccess?.();

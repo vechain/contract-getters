@@ -3,6 +3,7 @@ import { VeBetterPassport__factory } from '@contracts';
 import { useCallClause, getCallClauseQueryKey } from '@utils';
 import { NETWORK_TYPE } from '@/config/network';
 import { ZERO_ADDRESS } from '@vechain/sdk-core';
+import { ThorClient } from '@vechain/sdk-network';
 
 const contractAbi = VeBetterPassport__factory.abi;
 const method = 'isPerson' as const;
@@ -28,12 +29,14 @@ export const getIsPersonQueryKey = (
 
 /**
  * Hook to get the isPerson status from the VeBetterPassport contract.
+ * @param thor - The ThorClient instance.
  * @param networkType - network type
  * @param user - The user address.
  * @param customEnabled - Flag to enable or disable the hook. Default is true.
  * @returns The isPerson status (boolean).
  */
 export const useIsPerson = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     user?: string,
     customEnabled = true
@@ -44,6 +47,7 @@ export const useIsPerson = (
 
     // VeBetter Passport is person result: [ false, 'User has been signaled too many times' ]
     return useCallClause({
+        thor,
         abi: contractAbi,
         address: veBetterPassportContractAddress,
         method,
@@ -53,7 +57,8 @@ export const useIsPerson = (
                 !!user &&
                 customEnabled &&
                 !!veBetterPassportContractAddress &&
-                !!networkType,
+                !!networkType &&
+                !!thor,
             select: (data) => data[0],
         },
     });
@@ -61,10 +66,11 @@ export const useIsPerson = (
 
 /**
  * Hook to get the isPerson status from the VeBetterPassport contract for the current user.
+ * @param thor - The ThorClient instance.
  * @param networkType
  * @param address - The address of the account.
  * @returns The isPerson status.
  */
-export const useIsUserPerson = (networkType: NETWORK_TYPE, address?: string) => {
-    return useIsPerson(networkType, address);
+export const useIsUserPerson = (thor: ThorClient, networkType: NETWORK_TYPE, address?: string) => {
+    return useIsPerson(thor, networkType, address);
 };

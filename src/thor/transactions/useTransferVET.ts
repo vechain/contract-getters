@@ -7,8 +7,10 @@ import { humanAddress, isValidAddress } from '@utils';
 import { useCallback } from 'react';
 import { parseEther } from 'viem';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from '@vechain/sdk-network';
 
 type useTransferVETProps = {
+    thor: ThorClient;
     networkType: NETWORK_TYPE;
     fromAddress: string;
     receiverAddress: string;
@@ -22,6 +24,7 @@ type useTransferVETReturnValue = {
 } & Omit<UseSendTransactionReturnValue, 'sendTransaction'>;
 
 export const useTransferVET = ({
+    thor,
     networkType,
     fromAddress,
     receiverAddress,
@@ -29,7 +32,7 @@ export const useTransferVET = ({
     onSuccess,
     onError,
 }: useTransferVETProps): useTransferVETReturnValue => {
-    const { refresh } = useRefreshBalances(networkType);
+    const { refresh } = useRefreshBalances(thor, networkType);
 
     const buildClauses = useCallback(async () => {
         if (!receiverAddress || !amount || !isValidAddress(receiverAddress))
@@ -58,6 +61,7 @@ export const useTransferVET = ({
     }, [receiverAddress, amount]);
 
     const result = useSendTransaction({
+        thor,
         signerAccountAddress: fromAddress,
         privyUIOptions: {
             title: 'Confirm Transfer',

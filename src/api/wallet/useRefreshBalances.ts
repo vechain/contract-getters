@@ -1,10 +1,11 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useWallet } from './useWallet';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from '@vechain/sdk-network';
 
-export const useRefreshBalances = (networkType: NETWORK_TYPE) => {
+export const useRefreshBalances = (thor: ThorClient, networkType: NETWORK_TYPE) => {
     const queryClient = useQueryClient();
-    const { account } = useWallet({ networkType });
+    const { account } = useWallet({ thor, networkType });
 
     const refresh = async () => {
         const address = account?.address ?? '';

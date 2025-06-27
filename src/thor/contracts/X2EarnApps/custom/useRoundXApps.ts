@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useThor } from '@vechain/dapp-kit-react';
 import { XAllocationVoting__factory } from '@contracts';
 import { executeCallClause } from '@utils'
 import { XApp } from '@thor/contracts/X2EarnApps';
@@ -53,17 +52,17 @@ export const getRoundXAppsQueryKey = (roundId?: string) => [
 /**
  *  Hook to get all the available xApps (apps that can be voted on for allocation)
  *
+ *  @param thor - thor client
  *  @param networkType - network type
  *  @param roundId  the id of the round the get state for
  *
  *  @returns all the available xApps (apps that can be voted on for allocation) capped to 256
  */
 export const useRoundXApps = (
+    thor: ThorClient,
     networkType: NETWORK_TYPE,
     roundId?: string
 ) => {
-    const thor = useThor();
-
     return useQuery({
         queryKey: getRoundXAppsQueryKey(roundId),
         queryFn: async () => await getRoundXApps(thor, networkType, roundId),

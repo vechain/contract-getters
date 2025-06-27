@@ -8,8 +8,10 @@ import { ethers } from 'ethers';
 import { invalidateAndRefetchDomainQueries } from './utils/domainQueryUtils';
 import { humanAddress } from '@/utils';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from '@vechain/sdk-network';
 
 type useClaimVetDomainProps = {
+    thor: ThorClient;
     networkType: NETWORK_TYPE;
     domain: string;
     onSuccess?: () => void;
@@ -30,6 +32,7 @@ const ReverseRegistrarInterface = IReverseRegistrar__factory.createInterface();
  * This hook specializes in handling primary .vet domains
  */
 export const useClaimVetDomain = ({
+    thor,
     networkType,
     domain,
     onSuccess,
@@ -37,7 +40,7 @@ export const useClaimVetDomain = ({
     alreadyOwned = false,
 }: useClaimVetDomainProps): useClaimVetDomainReturnValue => {
     const queryClient = useQueryClient();
-    const { account } = useWallet({ networkType });
+    const { account } = useWallet({ thor, networkType });
     const { refresh: refreshMetadata } = useRefreshMetadata(
         networkType,
         domain,
@@ -157,6 +160,7 @@ export const useClaimVetDomain = ({
     ]);
 
     const result = useSendTransaction({
+        thor,
         signerAccountAddress: account?.address ?? '',
         privyUIOptions: {
             title: 'Sign to claim your VeChain nickname',

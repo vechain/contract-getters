@@ -13,8 +13,10 @@ import { QueryClient } from "@tanstack/react-query";
 import { WalletConfig } from "@api/wallet";
 import { NetworkConfig } from "@types";
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 type UseUpgradeSmartAccountVersionProps = {
+    thor: ThorClient;
     networkType: NETWORK_TYPE;
     smartAccountAddress: string;
     targetVersion: number;
@@ -32,6 +34,7 @@ type UseUpgradeSmartAccountVersionReturnValue = {
 const simpleAccountInterface = SimpleAccount__factory.createInterface();
 
 export const useUpgradeSmartAccount = ({
+    thor,
     smartAccountAddress,
     targetVersion,
     networkConfig,
@@ -47,7 +50,7 @@ export const useUpgradeSmartAccount = ({
 
     // Fetch the new implementation address for the requested version
     const { data: newImplementationAddress } =
-        useAccountImplementationAddress(networkConfig, targetVersion);
+        useAccountImplementationAddress(thor, networkConfig, targetVersion);
 
     const buildClauses = useCallback(async () => {
         if (!smartAccountAddress || !isValidAddress(smartAccountAddress)) {
@@ -86,6 +89,7 @@ export const useUpgradeSmartAccount = ({
     };
 
     const result = useSendTransaction({
+        thor,
         privyUIOptions: {
             title: 'Upgrade Smart Account',
             description: `Upgrading your account at ${humanAddress(

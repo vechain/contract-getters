@@ -1,13 +1,14 @@
 import { useCurrentAllocationsRoundId, useAllocationsRound } from '@thor';
 import { NETWORK_TYPE } from "@config/network";
+import { ThorClient } from "@vechain/sdk-network";
 
 /**
  * Hook to get info about the current allocation round
  * @returns the current allocation round info see {@link AllocationRoundWithState}
  */
-export const useCurrentAllocationsRound = (networkType: NETWORK_TYPE) => {
-    const currentRoundId = useCurrentAllocationsRoundId(networkType);
-    const allocationsRound = useAllocationsRound(networkType, currentRoundId.data);
+export const useCurrentAllocationsRound = (thor:ThorClient, networkType: NETWORK_TYPE) => {
+    const currentRoundId = useCurrentAllocationsRoundId(thor, networkType);
+    const allocationsRound = useAllocationsRound(thor, networkType, currentRoundId.data?.[0]?.toString());
 
     return {
         ...allocationsRound,
