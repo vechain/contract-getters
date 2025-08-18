@@ -1,0 +1,24 @@
+{
+  "name": "vechain-getters",
+  "private": true,
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean",
+    "example:nodejs": "yarn workspace nodejs-getters-example start",
+    "example:nodejs:dev": "yarn workspace nodejs-getters-example dev",
+    "example:react": "yarn workspace react-getters-example dev",
+    "example:react:build": "yarn workspace react-getters-example build"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.6"
+  }
+}
