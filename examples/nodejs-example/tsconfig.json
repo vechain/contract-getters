@@ -16,7 +16,10 @@
     "rootDir": "src",
     "declaration": true,
     "sourceMap": true,
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@vechain/getters-core": ["../../packages/getters-core/src/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
