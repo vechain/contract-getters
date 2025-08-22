@@ -1,24 +1,27 @@
 {
-  "name": "nodejs-getters-example",
-  "version": "0.0.1",
-  "private": true,
-  "description": "Node.js example showcasing VeChain getters usage",
-  "type": "module",
-  "main": "dist/index.js",
-  "scripts": {
-    "start": "yarn build && node dist/index.js",
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist"
-  },
-  "dependencies": {
-    "@vechain/getters-core": "0.0.1",
-    "@vechain/sdk-network": "^2.0.3"
-  },
-  "devDependencies": {
-    "@types/node": "^20.0.0",
-    "tsx": "^4.7.0",
-    "typescript": "^5.5.4"
-  }
+    "name": "nodejs-getters-example",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Node.js example showcasing VeChain getters usage",
+    "type": "module",
+    "main": "dist/index.js",
+    "scripts": {
+        "start": "yarn build && node dist/index.js",
+        "dev": "tsx watch src/index.ts",
+        "build": "tsc",
+        "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
+        "typecheck": "tsc --noEmit",
+        "clean": "rm -rf dist"
+    },
+    "dependencies": {
+        "@vechain/getters-core": "0.0.1",
+        "@vechain/sdk-network": "^2.0.3"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "eslint": "^9.33.0",
+        "typescript-eslint": "^8.40.0",
+        "tsx": "^4.7.0",
+        "typescript": "^5.5.4"
+    }
 }

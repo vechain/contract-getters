@@ -7,8 +7,7 @@ export default tseslint.config(
     {
         languageOptions: {
             parserOptions: {
-                tsconfigRootDir:
-                    '/Users/victor.emanuel/Desktop/Vechain/contract-getters/packages/getters-core',
+                tsconfigRootDir: '.',
                 project: './tsconfig.json',
             },
         },
@@ -16,7 +15,7 @@ export default tseslint.config(
     // Main configuration
     {
         extends: [...tseslint.configs.recommended],
-        files: ['src/**/*.{ts,tsx}'],
+        files: ['**/*.{ts,tsx,js,jsx}'],
         rules: {
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/ban-ts-comment': 'off',
