@@ -1,40 +1,65 @@
 # VeChain Getters
 
-Framework-agnostic VeChain getters (read-only) library with example applications.
+Framework-agnostic VeChain getters (read-only) library with example applications. Seamlessly integrates with existing VeChain SDK projects or works standalone.
+
+## 🚀 Getting Started
+
+### Installation
+
+```bash
+yarn add @vechain/getters-core
+# or
+npm install @vechain/getters-core
+```
+
+### Usage
+
+There are three ways to use VeChain Getters:
+
+1. **Create a new VeChainClient** (recommended for new projects):
+
+```typescript
+import { VeChainClient } from '@vechain/getters-core';
+
+const client = VeChainClient.create({
+    nodeUrl: 'https://testnet.vechain.org',
+});
+
+const balance = await getVot3Balance(client, walletAddress);
+```
+
+2. **Use with existing ThorClient** (for projects already using VeChain SDK):
+
+```typescript
+import { ThorClient } from '@vechain/sdk-network';
+import { VeChainClient } from '@vechain/getters-core';
+
+// Use your existing ThorClient
+const thorClient = ThorClient.at('https://testnet.vechain.org');
+const client = VeChainClient.from(thorClient);
+
+const balance = await getVot3Balance(client, walletAddress);
+```
+
+3. **Custom Contract Addresses** (for testing or custom deployments):
+
+```typescript
+const client = VeChainClient.create({
+    nodeUrl: 'https://testnet.vechain.org',
+    overrideAddresses: {
+        vot3ContractAddress: '0x6e8b4a88d37897fc11f6ba12c805695f1c41f40e',
+        // ... other contract addresses
+    },
+});
+```
 
 ## 📦 Packages
 
-- **`@vechain/getters-core`** - Framework-agnostic VeChain getters library
+- **`@vechain/getters-core`** - Framework-agnostic VeChain getters library with built-in TypeScript support
 
-## 🚀 Examples
+## 🎯 Examples
 
-This repository includes two example applications demonstrating how to use the getters library:
-
-### Node.js Example
-
-A simple Node.js application showcasing server-side usage.
-
-```bash
-# Run the Node.js example
-yarn example:nodejs
-
-# Development mode with hot reload
-yarn example:nodejs:dev
-```
-
-### React/Next.js Example
-
-A modern React application built with Next.js 14, demonstrating both server-side and client-side usage.
-
-```bash
-# Run the React example
-yarn example:react
-
-# Build for production
-yarn example:react:build
-```
-
-Visit [http://localhost:3000](http://localhost:3000) to see the React example in action.
+This repository includes example applications demonstrating different usage patterns:
 
 ## 🛠️ Development
 
@@ -47,25 +72,26 @@ Visit [http://localhost:3000](http://localhost:3000) to see the React example in
 
 1. **Install dependencies:**
 
-   ```bash
-   yarn install
-   ```
+    ```bash
+    yarn install
+    ```
 
-2. **Build the core library:**
+2. **Start core package in watch mode:**
 
-   ```bash
-   yarn build
-   ```
+    ```bash
+    yarn core:dev
+    ```
 
-3. **Run examples:**
+3. **Run example with hot reload:**
+    ```bash
+    yarn example:nodejs:dev
+    ```
 
-   ```bash
-   # Node.js example
-   yarn example:nodejs
+### Core Package Scripts
 
-   # React example
-   yarn example:react
-   ```
+- `yarn core:dev` - Start core package in watch mode
+- `yarn core:build` - Build core package
+- `yarn core:typecheck` - Run type checking
 
 ### Available Scripts
 
@@ -112,50 +138,78 @@ The examples are set up and ready to showcase your getters. To add real VeChain 
 
 1. **Implement getters** in `packages/getters-core/src/index.ts`:
 
-   ```typescript
-   export { createClient } from "./client"
-   export { getAccountBalance } from "./getters/account"
-   export { getLatestBlock } from "./getters/block"
-   export { getTransaction } from "./getters/transaction"
-   ```
+    ```typescript
+    export { createClient } from './client';
+    export { getAccountBalance } from './getters/account';
+    export { getLatestBlock } from './getters/block';
+    export { getTransaction } from './getters/transaction';
+    ```
 
 2. **Update examples** to use the new getters:
-
-   - Update imports in both example applications
-   - Add real VeChain network calls
-   - Implement proper error handling and loading states
+    - Update imports in both example applications
+    - Add real VeChain network calls
+    - Implement proper error handling and loading states
 
 3. **Add TypeScript types** for better developer experience
 
-## 📖 Example Usage
-
-### Node.js
-
-```javascript
-import { createClient, getAccountBalance } from "@vechain/getters-core"
-
-const client = createClient({
-  nodeUrl: "https://testnet.vechain.org",
-})
-
-const balance = await getAccountBalance(client, "0x...")
-console.log("Balance:", balance)
-```
-
-### React
+## 📖 Complete Example
 
 ```typescript
-import { useEffect, useState } from "react"
-import { getLatestBlock } from "@vechain/getters-core"
+import { ThorClient } from '@vechain/sdk-network';
+import { getVot3Balance, VeChainClient } from '@vechain/getters-core';
 
-function LatestBlock({ client }) {
-  const [block, setBlock] = useState(null)
+// Example 1: Using existing ThorClient
+const thorClient = ThorClient.at('https://testnet.vechain.org');
+const client = VeChainClient.from(thorClient);
+const balance1 = await getVot3Balance(client, walletAddress);
 
-  useEffect(() => {
-    getLatestBlock(client).then(setBlock)
-  }, [client])
+// Example 2: Direct VeChainClient creation
+const client2 = VeChainClient.create({
+    nodeUrl: 'https://testnet.vechain.org',
+});
+const balance2 = await getVot3Balance(client2, walletAddress);
 
-  return <div>Latest Block: {block?.number}</div>
+// Example 3: Custom contract addresses
+const client3 = VeChainClient.create({
+    nodeUrl: 'https://testnet.vechain.org',
+    options: {
+        // Optional ThorClient options
+        pollingInterval: 10000,
+    },
+    overrideAddresses: {
+        // Override specific contract addresses
+        vot3ContractAddress: '0x6e8b4a88d37897fc11f6ba12c805695f1c41f40e',
+    },
+});
+const balance3 = await getVot3Balance(client3, walletAddress);
+```
+
+### React Integration
+
+```typescript
+import { useEffect, useState } from 'react';
+import { VeChainClient, getVot3Balance } from '@vechain/getters-core';
+
+function VOT3Balance({ walletAddress }) {
+    const [balance, setBalance] = useState<string>();
+    const [error, setError] = useState<Error>();
+
+    useEffect(() => {
+        const client = VeChainClient.create({
+            nodeUrl: 'https://testnet.vechain.org',
+        });
+
+        getVot3Balance(client, walletAddress)
+            .then(setBalance)
+            .catch(setError);
+
+        return () => client.destroy();
+    }, [walletAddress]);
+
+    if (error) return <div>Error: {error.message}</div>;
+    if (!balance) return <div>Loading...</div>;
+
+    return <div>VOT3 Balance: {balance}</div>;
 }
 ```
 
