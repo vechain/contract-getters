@@ -11,8 +11,9 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
         "strict": true
     },
-    "include": ["src", "packages/**/*"],
-    "exclude": ["node_modules"]
+    "include": ["src"],
+    "exclude": ["node_modules", "dist", ".turbo"]
 }

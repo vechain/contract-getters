@@ -30,9 +30,15 @@
     },
     "devDependencies": {
         "@tsconfig/recommended": "^1.0.10",
-        "typescript-eslint": "^8.40.0",
+        "@types/node": "^20.0.0",
+        "@typescript-eslint/eslint-plugin": "^8.40.0",
+        "@typescript-eslint/parser": "^8.40.0",
         "@vechain/sdk-network": "^2.0.3",
         "tsup": "^8.5.0",
-        "typescript": "^5.5.4"
+        "typescript": "^5.5.4",
+        "typescript-eslint": "^8.40.0"
+    },
+    "dependencies": {
+        "@vechain/vebetterdao-contracts": "^7.0.2"
     }
 }
