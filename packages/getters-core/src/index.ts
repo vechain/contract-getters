@@ -1,5 +1,2 @@
-/* eslint-disable no-console */
-export const ping = () => 'pong ';
-
-export const foo = 'bar';
-console.log('Testing ping function:');
+export * from './vot3';
+export * from './client';
