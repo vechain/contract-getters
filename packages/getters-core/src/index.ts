@@ -1,2 +1,5 @@
-export const ping = () => "pong";
-// export { createClient, getAccountBalance, ... } once you paste in your getters
+/* eslint-disable no-console */
+export const ping = () => 'pong ';
+
+export const foo = 'bar';
+console.log('Testing ping function:');
