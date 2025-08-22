@@ -16,9 +16,26 @@
     "example:nodejs": "yarn workspace nodejs-getters-example start",
     "example:nodejs:dev": "yarn workspace nodejs-getters-example dev",
     "example:react": "yarn workspace react-getters-example dev",
-    "example:react:build": "yarn workspace react-getters-example build"
+    "example:react:build": "yarn workspace react-getters-example build",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,md}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint"
+    ]
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.40.0",
+    "@typescript-eslint/parser": "^8.40.0",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
+    "prettier": "^3.6.2",
     "turbo": "^2.0.6"
   }
 }
