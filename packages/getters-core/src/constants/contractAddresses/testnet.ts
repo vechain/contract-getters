@@ -68,5 +68,14 @@ const testnetAddresses: ContractAddressesConfig = {
         '0xeb71148c9B3cd57e228c2152d79f6e78F5F1ef9a', // VeDelegate Votes Contract
     veDelegateTokenContractAddress:
         '0xD3f7b82Df5705D34f64C634d2dEf6B1cB3116950', // VeDelegate Token Contract
+
+    //VetDomains Contracts
+    vetDomainsContractAddress: '0xcBFB30c1F267914816668d53AcBA7bA7c9806D13',
+    vetDomainsPublicResolverAddress:
+        '0xA6eFd130085a127D090ACb0b100294aD1079EA6f',
+    vetDomainsReverseRegistrarAddress:
+        '0x6878f1aD5e3015310CfE5B38d7B7071C5D8818Ca',
+    vnsResolverAddress: '0xc403b8EA53F707d7d4de095f0A20bC491Cf2bc94',
+    vetDomainAvatarUrl: 'https://testnet.vet.domains/api/avatar',
 };
 export default testnetAddresses;

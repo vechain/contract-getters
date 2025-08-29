@@ -68,5 +68,14 @@ const mainnetAddresses: ContractAddressesConfig = {
         '0x0000000000000000000000000000000000000000', // VeDelegate Votes Contract
     veDelegateTokenContractAddress:
         '0x0000000000000000000000000000000000000000', // VeDelegate Token Contract
+
+    //VetDomains Contracts
+    vetDomainsContractAddress: '0xa9231da8BF8D10e2df3f6E03Dd5449caD600129b',
+    vetDomainsPublicResolverAddress:
+        '0xabac49445584C8b6c1472b030B1076Ac3901D7cf',
+    vetDomainsReverseRegistrarAddress:
+        '0x5c970901a587BA3932C835D4ae5FAE2BEa7e78Bc',
+    vnsResolverAddress: '0xA11413086e163e41901bb81fdc5617c975Fa5a1A',
+    vetDomainAvatarUrl: 'https://vet.domains/api/avatar',
 };
 export default mainnetAddresses;
