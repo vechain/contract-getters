@@ -33,11 +33,11 @@ export const getRoundXApps = async (
         )
         .read.getAppsOfRound(BigInt(roundId));
 
-    return result.map((app) => ({
-        id: app[0].id.toString(),
-        teamWalletAddress: app[0].teamWalletAddress,
-        name: app[0].name,
-        metadataURI: app[0].metadataURI,
-        createdAtTimestamp: app[0].createdAtTimestamp.toString(),
+    return result[0].map((app) => ({
+        id: app.id.toString(),
+        teamWalletAddress: app.teamWalletAddress,
+        name: app.name,
+        metadataURI: app.metadataURI,
+        createdAtTimestamp: app.createdAtTimestamp.toString(),
     }));
 };

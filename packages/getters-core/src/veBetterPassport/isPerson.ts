@@ -18,10 +18,12 @@ export const getIsPerson = async (
         options?.networkUrl,
     );
 
-    return await enhancedClient.contracts
+    const result: readonly [boolean, string] = await enhancedClient.contracts
         .load(
             enhancedClient.contractAddresses.veBetterPassportContractAddress,
             VeBetterPassport__factory.abi,
         )
         .read.isPerson(user);
+
+    return result[0];
 };
