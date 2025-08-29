@@ -16,10 +16,14 @@
         "core:dev": "yarn workspace @vechain/getters-core dev",
         "core:build": "yarn workspace @vechain/getters-core build",
         "core:typecheck": "yarn workspace @vechain/getters-core typecheck",
-        "example:nodejs": "yarn workspace nodejs-getters-example start",
+        "example:nodejs:build": "yarn workspace nodejs-getters-example build",
+        "example:nodejs:start": "yarn workspace nodejs-getters-example start",
         "example:nodejs:dev": "yarn workspace nodejs-getters-example dev",
-        "example:react": "yarn workspace react-getters-example dev",
-        "example:react:build": "yarn workspace react-getters-example build",
+        "copy:abis": "node scripts/copy-abis.js",
+        "gen:typechain": "typechain --target ethers-v6 --out-dir packages/getters-core/src/types/contracts temp-abis/*.json",
+        "cleanup:abis": "node scripts/cleanup-abis.js",
+        "gen:types": "yarn copy:abis && yarn gen:typechain && yarn cleanup:abis",
+        "postinstall": "yarn gen:types || true",
         "prepare": "husky"
     },
     "lint-staged": {
@@ -33,13 +37,17 @@
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^8.40.0",
         "@typescript-eslint/parser": "^8.40.0",
+        "@typechain/ethers-v6": "^0.5.1",
+        "b32": "github:vechain/b32",
         "eslint": "^9.33.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.4",
+        "ethers": "^6.13.0",
         "husky": "^9.1.7",
         "lint-staged": "^16.1.5",
         "prettier": "^3.6.2",
         "turbo": "^2.0.6",
+        "typechain": "^8.3.2",
         "typescript-eslint": "^8.40.0"
     }
 }
