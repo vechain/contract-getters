@@ -1,6 +1,6 @@
 # VeChain Getters
 
-Framework-agnostic VeChain getters (read-only) library with example applications. Seamlessly integrates with existing VeChain SDK projects or works standalone.
+A simple, beginner-friendly library for reading data from VeChain smart contracts. No complex setup required - just install and call functions! Works with any JavaScript/TypeScript project and integrates seamlessly with existing VeChain SDK projects.
 
 ## 🚀 Getting Started
 
@@ -14,43 +14,70 @@ npm install @vechain/getters-core
 
 ### Usage
 
-There are three ways to use VeChain Getters:
+There are 4 ways to use VeChain Getters, from simplest to most customized:
 
-1. **Create a new VeChainClient** (recommended for new projects):
+#### 1. **No Client Required** (simplest - perfect for beginners):
 
 ```typescript
-import { VeChainClient } from '@vechain/getters-core';
+import { getVot3Balance } from '@vechain/getters-core';
 
-const client = VeChainClient.create({
-    nodeUrl: 'https://testnet.vechain.org',
-});
-
-const balance = await getVot3Balance(client, walletAddress);
+// Just call the function - no setup needed!
+const balance = await getVot3Balance(
+    '0x66E9709bc01B8c0AfC99a7dC513f501821306E85',
+);
+console.log(`Balance: ${balance}`);
 ```
 
-2. **Use with existing ThorClient** (for projects already using VeChain SDK):
+#### 2. **Custom Network** (specify which VeChain network to use):
+
+```typescript
+import { getVot3Balance } from '@vechain/getters-core';
+
+const balance = await getVot3Balance(
+    '0x66E9709bc01B8c0AfC99a7dC513f501821306E85',
+    {
+        networkUrl: 'https://testnet.vechain.org',
+    },
+);
+```
+
+#### 3. **Use Existing ThorClient** (for projects already using VeChain SDK):
 
 ```typescript
 import { ThorClient } from '@vechain/sdk-network';
-import { VeChainClient } from '@vechain/getters-core';
+import { VeChainClient, getVot3Balance } from '@vechain/getters-core';
 
 // Use your existing ThorClient
 const thorClient = ThorClient.at('https://testnet.vechain.org');
-const client = VeChainClient.from(thorClient);
+const vechainClient = VeChainClient.from(thorClient);
 
-const balance = await getVot3Balance(client, walletAddress);
+const balance = await getVot3Balance(
+    '0x66E9709bc01B8c0AfC99a7dC513f501821306E85',
+    {
+        client: vechainClient,
+    },
+);
 ```
 
-3. **Custom Contract Addresses** (for testing or custom deployments):
+#### 4. **Custom Contract Addresses** (for testing or custom deployments):
 
 ```typescript
-const client = VeChainClient.create({
+import { VeChainClient, getVot3Balance } from '@vechain/getters-core';
+
+const vechainClient = VeChainClient.create({
     nodeUrl: 'https://testnet.vechain.org',
     overrideAddresses: {
         vot3ContractAddress: '0x6e8b4a88d37897fc11f6ba12c805695f1c41f40e',
         // ... other contract addresses
     },
 });
+
+const balance = await getVot3Balance(
+    '0x66E9709bc01B8c0AfC99a7dC513f501821306E85',
+    {
+        client: vechainClient,
+    },
+);
 ```
 
 ## 📦 Packages
@@ -59,7 +86,11 @@ const client = VeChainClient.create({
 
 ## 🎯 Examples
 
-This repository includes example applications demonstrating different usage patterns:
+Check out the `examples/nodejs-example/` folder for a complete working example that demonstrates all 4 usage patterns. You can run it with:
+
+```bash
+yarn example:nodejs
+```
 
 ## 🛠️ Development
 
@@ -106,8 +137,6 @@ This repository includes example applications demonstrating different usage patt
 
 - `yarn example:nodejs` - Run Node.js example
 - `yarn example:nodejs:dev` - Run Node.js example with hot reload
-- `yarn example:react` - Run React example in development
-- `yarn example:react:build` - Build React example for production
 
 ## 📁 Project Structure
 
@@ -119,11 +148,7 @@ vechain-getters/
 │       ├── package.json
 │       └── tsconfig.json
 ├── examples/
-│   ├── nodejs-example/        # Node.js example app
-│   │   ├── src/
-│   │   ├── package.json
-│   │   └── README.md
-│   └── react-example/         # React/Next.js example app
+│   └── nodejs-example/        # Node.js example app
 │       ├── src/
 │       ├── package.json
 │       └── README.md
@@ -151,67 +176,6 @@ The examples are set up and ready to showcase your getters. To add real VeChain 
     - Implement proper error handling and loading states
 
 3. **Add TypeScript types** for better developer experience
-
-## 📖 Complete Example
-
-```typescript
-import { ThorClient } from '@vechain/sdk-network';
-import { getVot3Balance, VeChainClient } from '@vechain/getters-core';
-
-// Example 1: Using existing ThorClient
-const thorClient = ThorClient.at('https://testnet.vechain.org');
-const client = VeChainClient.from(thorClient);
-const balance1 = await getVot3Balance(client, walletAddress);
-
-// Example 2: Direct VeChainClient creation
-const client2 = VeChainClient.create({
-    nodeUrl: 'https://testnet.vechain.org',
-});
-const balance2 = await getVot3Balance(client2, walletAddress);
-
-// Example 3: Custom contract addresses
-const client3 = VeChainClient.create({
-    nodeUrl: 'https://testnet.vechain.org',
-    options: {
-        // Optional ThorClient options
-        pollingInterval: 10000,
-    },
-    overrideAddresses: {
-        // Override specific contract addresses
-        vot3ContractAddress: '0x6e8b4a88d37897fc11f6ba12c805695f1c41f40e',
-    },
-});
-const balance3 = await getVot3Balance(client3, walletAddress);
-```
-
-### React Integration
-
-```typescript
-import { useEffect, useState } from 'react';
-import { VeChainClient, getVot3Balance } from '@vechain/getters-core';
-
-function VOT3Balance({ walletAddress }) {
-    const [balance, setBalance] = useState<string>();
-    const [error, setError] = useState<Error>();
-
-    useEffect(() => {
-        const client = VeChainClient.create({
-            nodeUrl: 'https://testnet.vechain.org',
-        });
-
-        getVot3Balance(client, walletAddress)
-            .then(setBalance)
-            .catch(setError);
-
-        return () => client.destroy();
-    }, [walletAddress]);
-
-    if (error) return <div>Error: {error.message}</div>;
-    if (!balance) return <div>Loading...</div>;
-
-    return <div>VOT3 Balance: {balance}</div>;
-}
-```
 
 ## 🤝 Contributing
 
