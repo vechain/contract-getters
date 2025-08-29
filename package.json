@@ -20,7 +20,7 @@
         "example:nodejs:start": "yarn workspace nodejs-getters-example start",
         "example:nodejs:dev": "yarn workspace nodejs-getters-example dev",
         "copy:abis": "node scripts/copy-abis.js",
-        "gen:typechain": "typechain --target ethers-v6 --out-dir packages/getters-core/src/types/contracts temp-abis/*.json",
+        "gen:typechain": "typechain --target ethers-v6 --out-dir packages/getters-core/src/typechain-types temp-abis/*.json",
         "cleanup:abis": "node scripts/cleanup-abis.js",
         "gen:types": "yarn copy:abis && yarn gen:typechain && yarn cleanup:abis",
         "postinstall": "yarn gen:types || true",

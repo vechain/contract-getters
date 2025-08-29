@@ -127,3 +127,6 @@ dist/
 
 # Temporary ABI files
 temp-abis/
+
+# Typechain types
+typechain-types
