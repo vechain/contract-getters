@@ -124,3 +124,9 @@ dist/
 # Build folders (react-example)
 
 .next/
+
+# Temporary ABI files
+temp-abis/
+
+# Typechain types
+typechain-types
