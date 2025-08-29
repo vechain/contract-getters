@@ -1,99 +1,106 @@
-import { getVot3Balance, VeChainClient } from '@vechain/getters-core';
-import { ThorClient } from '@vechain/sdk-network';
+import {
+    getVot3Balance,
+    getB3trBalance,
+    getCurrentRoundId,
+    getRoundXApps,
+    getAppShares,
+    getErc20Balance,
+    getTokenInfo,
+    getIsPerson,
+} from '@vechain/getters-core';
 
-const TESTNET_NODE: string = 'https://testnet.vechain.org';
-const TEST_ADDRESS = '0x66E9709bc01B8c0AfC99a7dC513f501821306E85';
-const CUSTOM_VOT3_ADDRESS = '0x6e8b4a88d37897fc11f6ba12c805695f1c41f40e';
+const WALLET_ADDRESS = '0x66E9709bc01B8c0AfC99a7dC513f501821306E85';
+const B3TR_TOKEN_ADDRESS = '0x5ef79995FE8a89e0812330E4378eB2660ceDe699'; //Mainnet B3TR
+const ROUND_ID = '50';
+const APP_ID =
+    '0x2fc30c2ad41a2994061efaf218f1d52dc92bc4a31a0f02a4916490076a7a393a'; //Mugshot
 
-/**
- * Example 1: Using default configuration (no client or network provided)
- * This uses the built-in default network URL from the getters library
- */
-async function withDefaults() {
-    console.info('\n1. Using default configuration');
-    console.info('─'.repeat(35));
+async function runVot3Example() {
+    console.info('\n🗳️  VOT3 Contract Usage');
+    console.info('─'.repeat(40));
 
-    const balance = await getVot3Balance(TEST_ADDRESS);
+    console.info(`Getting VOT3 balance for ${WALLET_ADDRESS}...`);
+    const balance = await getVot3Balance(WALLET_ADDRESS);
     console.info(`VOT3 Balance: ${balance.toString()}`);
-    console.info('✓ Used default network and contract addresses');
 }
 
-/**
- * Example 2: Using an existing ThorClient
- * Convert your existing ThorClient to a VeChainClient
- */
-async function withExistingThorClient() {
-    console.info('\n2. Using existing ThorClient');
-    console.info('─'.repeat(35));
+async function runB3trExample() {
+    console.info('\n🪙 B3TR Contract Usage');
+    console.info('─'.repeat(40));
 
-    const thorClient = ThorClient.at(TESTNET_NODE);
-    const veChainClient = VeChainClient.from(thorClient);
+    console.info(`Getting B3TR balance for ${WALLET_ADDRESS}...`);
+    const balance = await getB3trBalance(WALLET_ADDRESS);
+    console.info(`B3TR Balance: ${balance.toString()}`);
+}
 
-    const balance = await getVot3Balance(TEST_ADDRESS, {
-        client: veChainClient,
-    });
+async function runAllocationVotingExample() {
+    console.info('\n🗳️  AllocationVoting Contract Usage');
+    console.info('─'.repeat(40));
 
-    console.info(`VOT3 Balance: ${balance.toString()}`);
+    console.info('Getting current round ID...');
+    const currentRound = await getCurrentRoundId();
+    console.info(`Current Round ID: ${currentRound.toString()}`);
+
+    console.info('Getting apps for current round...');
+    const apps = await getRoundXApps(currentRound.toString());
+    console.info(`Apps in round ${currentRound}: ${apps.length} apps found`);
+
+    if (apps.length > 0) {
+        console.info(`First app: ${apps[0].name} (ID: ${apps[0].id})`);
+        console.info(`Team wallet: ${apps[0].teamWalletAddress}`);
+    }
+}
+
+async function runAllocationPoolExample() {
+    console.info('\n🏊 AllocationPool Contract Usage');
+    console.info('─'.repeat(40));
+
+    console.info(`Getting app shares for round ${ROUND_ID}...`);
+    const shares = await getAppShares(ROUND_ID, APP_ID);
+    console.info(`App shares for round ${ROUND_ID}:`);
+    console.info(`  Share: ${shares[0]?.toString() || 'N/A'}`);
+    console.info(`  Unallocated Share: ${shares[1]?.toString() || 'N/A'}`);
+}
+
+async function runErc20Example() {
+    console.info('\n🎯 ERC20 Contract Usage');
+    console.info('─'.repeat(40));
+
+    console.info(`Getting token info for ${B3TR_TOKEN_ADDRESS}...`);
+    const tokenInfo = await getTokenInfo(B3TR_TOKEN_ADDRESS);
+    console.info(`Token Name: ${tokenInfo.name}`);
+    console.info(`Token Symbol: ${tokenInfo.symbol}`);
+    console.info(`Token Decimals: ${tokenInfo.decimals}`);
+
     console.info(
-        `Contract: ${veChainClient.contractAddresses.vot3ContractAddress}`,
+        `Getting ${tokenInfo.symbol} balance for ${WALLET_ADDRESS}...`,
     );
-    console.info('✓ Converted existing ThorClient to VeChainClient');
+    const balance = await getErc20Balance(B3TR_TOKEN_ADDRESS, WALLET_ADDRESS);
+    console.info(`${tokenInfo.symbol} Balance: ${balance.toString()}`);
 }
 
-/**
- * Example 3: Creating VeChainClient directly
- * Use VeChainClient.create() with a custom network URL
- */
-async function withDirectVeChainClient() {
-    console.info('\n3. Creating VeChainClient directly');
-    console.info('─'.repeat(35));
+async function runVeBetterPassportExample() {
+    console.info('\n🛂 VeBetterPassport Contract Usage');
+    console.info('─'.repeat(40));
 
-    const balance = await getVot3Balance(TEST_ADDRESS, {
-        networkUrl: TESTNET_NODE,
-    });
-
-    console.info(`VOT3 Balance: ${balance.toString()}`);
-    console.info(`Network: ${TESTNET_NODE}`);
-    console.info('✓ Created VeChainClient with custom network URL');
-}
-
-/**
- * Example 4: Using custom contract addresses
- * Override default contract addresses for testing or custom deployments
- */
-async function withCustomContractAddresses() {
-    console.info('\n4. Using custom contract addresses');
-    console.info('─'.repeat(35));
-
-    const customClient = VeChainClient.create({
-        nodeUrl: TESTNET_NODE,
-        overrideAddresses: {
-            vot3ContractAddress: CUSTOM_VOT3_ADDRESS,
-        },
-    });
-
-    const balance = await getVot3Balance(TEST_ADDRESS, {
-        client: customClient,
-    });
-
-    console.info(`VOT3 Balance: ${balance.toString()}`);
-    console.info(
-        `Custom contract: ${customClient.contractAddresses.vot3ContractAddress}`,
-    );
-    console.info('✓ Used custom contract address override');
+    console.info(`Checking if ${WALLET_ADDRESS} is a verified person...`);
+    const isPerson = await getIsPerson(WALLET_ADDRESS);
+    console.info(`Is person: ${isPerson ? 'Yes ✅' : 'No ❌'}`);
 }
 
 async function main() {
-    console.info('🔗 (VOT3) - Contract Getters Examples');
-    console.info('═'.repeat(40));
+    console.info('🔗 VeChain Contract Getters - All Examples');
+    console.info('═'.repeat(50));
 
     try {
-        await withDefaults();
-        await withExistingThorClient();
-        await withDirectVeChainClient();
-        await withCustomContractAddresses();
+        await runVot3Example();
+        await runB3trExample();
+        await runAllocationVotingExample();
+        await runAllocationPoolExample();
+        await runErc20Example();
+        await runVeBetterPassportExample();
 
-        console.info('\n✨ All examples completed successfully!');
+        console.info('\n✨ All contract examples completed successfully!');
     } catch (error) {
         console.error(
             '\n❌ Error:',

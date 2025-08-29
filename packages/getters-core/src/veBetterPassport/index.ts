@@ -1,0 +1,1 @@
+export { getIsPerson } from './isPerson';
