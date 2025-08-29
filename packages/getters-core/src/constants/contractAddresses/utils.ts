@@ -1,38 +1,23 @@
-import { ThorClient, MAINNET_URL, TESTNET_URL } from '@vechain/sdk-network';
+import { ThorClient } from '@vechain/sdk-network';
 import mainnetAddresses from './mainnet';
 import testnetAddresses from './testnet';
 import { ContractAddressesConfig } from './type';
+import { MAINNET_URLS, TESTNET_URLS } from '../networkUrls';
 
 export const getContractAddresses = (
     thor: ThorClient,
     overrideAddresses?: Partial<ContractAddressesConfig>,
 ) => {
     const nodeURL = thor.httpClient.baseURL;
-    //TODO: Move to another constant file
-    const testnetNodes = [
-        'https://testnet.vechain.org',
-        'https://vethor-node-test.vechaindev.com',
-        'https://sync-testnet.veblocks.net',
-        'https://testnet.vecha.in',
-        TESTNET_URL,
-    ];
 
-    const mainnetNodes = [
-        'https://mainnet.vechain.org',
-        'https://vethor-node.vechain.com',
-        'https://mainnet.veblocks.net',
-        'https://mainnet.vecha.in',
-        MAINNET_URL,
-    ];
-
-    if (testnetNodes.includes(nodeURL)) {
+    if (TESTNET_URLS.includes(nodeURL)) {
         return {
             ...testnetAddresses,
             ...overrideAddresses,
         };
     }
 
-    if (mainnetNodes.includes(nodeURL)) {
+    if (MAINNET_URLS.includes(nodeURL)) {
         return {
             ...mainnetAddresses,
             ...overrideAddresses,
