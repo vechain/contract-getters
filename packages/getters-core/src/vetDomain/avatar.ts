@@ -28,7 +28,6 @@ export const getAvatar = async (
     );
 
     try {
-        console.info('got here');
         // Get avatar record from contract
         const avatarRecord = await fetchAvatarFromContract(
             domain,

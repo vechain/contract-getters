@@ -1,4 +1,5 @@
 import {
+    getAddressDomain,
     getAppShares,
     getAvatar,
     getB3trBalance,
@@ -10,7 +11,7 @@ import {
     getVot3Balance,
 } from '@vechain/getters-core';
 
-const WALLET_ADDRESS = '0x66E9709bc01B8c0AfC99a7dC513f501821306E85';
+const WALLET_ADDRESS = '0xF370940aBDBd2583bC80bfc19d19bc216C88Ccf0';
 const B3TR_TOKEN_ADDRESS = '0x5ef79995FE8a89e0812330E4378eB2660ceDe699'; //Mainnet B3TR
 const ROUND_ID = '50';
 const APP_ID =
@@ -93,11 +94,13 @@ async function runVetDomainsExample() {
     console.info('\n🌐 VetDomains Example');
     console.info('─'.repeat(40));
 
+    console.info(`Getting address domain for ${WALLET_ADDRESS}...`);
+    const addressDomain = await getAddressDomain(WALLET_ADDRESS);
+    console.info(`Address domain: ${addressDomain}`);
+
     console.info(`Getting avatar for ${WALLET_ADDRESS}...`);
-    const avatar = await getAvatar('root-staging-b3tr.veworld.vet', {
-        networkUrl: 'https://testnet.vechain.org',
-    });
-    console.info(`Avatar: ${avatar}`);
+    const avatar = await getAvatar(addressDomain || '');
+    console.info(`Avatar: ${avatar ? avatar.slice(0, 30) + '...' : 'None'}`);
 }
 
 async function main() {
