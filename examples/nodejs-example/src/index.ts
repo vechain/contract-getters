@@ -1,12 +1,13 @@
 import {
-    getVot3Balance,
+    getAppShares,
+    getAvatar,
     getB3trBalance,
     getCurrentRoundId,
-    getRoundXApps,
-    getAppShares,
     getErc20Balance,
-    getTokenInfo,
     getIsPerson,
+    getRoundXApps,
+    getTokenInfo,
+    getVot3Balance,
 } from '@vechain/getters-core';
 
 const WALLET_ADDRESS = '0x66E9709bc01B8c0AfC99a7dC513f501821306E85';
@@ -88,6 +89,17 @@ async function runVeBetterPassportExample() {
     console.info(`Is person: ${isPerson ? 'Yes ✅' : 'No ❌'}`);
 }
 
+async function runVetDomainsExample() {
+    console.info('\n🌐 VetDomains Example');
+    console.info('─'.repeat(40));
+
+    console.info(`Getting avatar for ${WALLET_ADDRESS}...`);
+    const avatar = await getAvatar('root-staging-b3tr.veworld.vet', {
+        networkUrl: 'https://testnet.vechain.org',
+    });
+    console.info(`Avatar: ${avatar}`);
+}
+
 async function main() {
     console.info('🔗 VeChain Contract Getters - All Examples');
     console.info('═'.repeat(50));
@@ -99,6 +111,7 @@ async function main() {
         await runAllocationPoolExample();
         await runErc20Example();
         await runVeBetterPassportExample();
+        await runVetDomainsExample();
 
         console.info('\n✨ All contract examples completed successfully!');
     } catch (error) {
