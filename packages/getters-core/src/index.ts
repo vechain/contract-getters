@@ -7,3 +7,4 @@ export * from './b3tr';
 export * from './erc20';
 // export * from './oracle';
 export * from './veBetterPassport';
+export * from './vetDomain';

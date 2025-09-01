@@ -51,4 +51,11 @@ export type ContractAddressesConfig = {
     veDelegateContractAddress: string; // VeDelegate main Contract
     veDelegateVotesContractAddress: string; // VeDelegate Votes Contract
     veDelegateTokenContractAddress: string; // VeDelegate Token Contract
+
+    //VetDomains Contracts
+    vetDomainsContractAddress: string;
+    vetDomainsPublicResolverAddress: string;
+    vetDomainsReverseRegistrarAddress: string;
+    vnsResolverAddress: string;
+    vetDomainAvatarUrl: string;
 };

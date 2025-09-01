@@ -5,31 +5,6 @@ const path = require('path');
 
 const TEMP_DIR = path.join(__dirname, '../temp-abis');
 
-// VeBetterDAO contract ABIs we want to include
-const VEBETTERDAO_CONTRACTS = [
-    'VeBetterDAO-b3tr.json',
-    'VeBetterDAO-vot3.json',
-    'VeBetterDAO-ve-better-passport.json',
-    'VeBetterDAO-x-allocation-pool.json',
-    'VeBetterDAO-x-allocations-voting.json',
-    'VeBetterDAO-emissions.json',
-    'VeBetterDAO-voter-rewards.json',
-    'VeBetterDAO-galaxy-member.json',
-    'VeBetterDAO-treasury.json',
-    'VeBetterDAO-timelock.json',
-    'VeBetterDAO-b3tr-governor.json',
-    'VeBetterDAO-node-management.json',
-    'VeBetterDAO-x-2-earn-apps.json',
-    'VeBetterDAO-x-2-earn-creator.json',
-    'VeBetterDAO-x-2-earn-rewards-pool.json',
-];
-
-// Additional contracts we need
-const ADDITIONAL_CONTRACTS = [
-    { source: 'oracle.vechain.energy.json', target: 'Oracle.json' },
-    { source: 'vip180-mintable.json', target: 'ERC20.json' },
-];
-
 function log(message) {
     console.log(`📋 ${message}`);
 }
@@ -50,35 +25,19 @@ function main() {
         }
         fs.mkdirSync(TEMP_DIR, { recursive: true });
 
-        // Copy VeBetterDAO contracts
-        let copiedCount = 0;
-        VEBETTERDAO_CONTRACTS.forEach((contractFile) => {
-            const sourcePath = path.join(b32AbiDir, contractFile);
-            const targetPath = path.join(TEMP_DIR, contractFile);
+        // Copy all ABI files
+        const abiFiles = fs
+            .readdirSync(b32AbiDir)
+            .filter((file) => file.endsWith('.json'));
 
-            if (fs.existsSync(sourcePath)) {
-                fs.copyFileSync(sourcePath, targetPath);
-                copiedCount++;
-            } else {
-                console.warn(`⚠️  Warning: ${contractFile} not found`);
-            }
-        });
-
-        // Copy additional contracts with rename
-        ADDITIONAL_CONTRACTS.forEach(({ source, target }) => {
-            const sourcePath = path.join(b32AbiDir, source);
-            const targetPath = path.join(TEMP_DIR, target);
-
-            if (fs.existsSync(sourcePath)) {
-                fs.copyFileSync(sourcePath, targetPath);
-                copiedCount++;
-            } else {
-                console.warn(`⚠️  Warning: ${source} not found`);
-            }
+        abiFiles.forEach((file) => {
+            const sourcePath = path.join(b32AbiDir, file);
+            const targetPath = path.join(TEMP_DIR, file);
+            fs.copyFileSync(sourcePath, targetPath);
         });
 
         log(
-            `✅ Successfully copied ${copiedCount} ABI files to temp directory`,
+            `✅ Successfully copied ${abiFiles.length} ABI files to temp directory`,
         );
     } catch (error) {
         console.error('❌ Error copying ABIs:', error.message);
