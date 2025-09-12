@@ -1,6 +1,6 @@
 {
     "name": "@vechain/contract-getters",
-    "version": "0.0.1",
+    "version": "1.0.0-beta.0",
     "private": false,
     "description": "Framework-agnostic VeChain getters (read-only).",
     "license": "MIT",
