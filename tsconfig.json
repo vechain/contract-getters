@@ -16,5 +16,5 @@
         "types": []
     },
     "include": ["packages/*/src", "examples/*/src"],
-    "exclude": ["node_modules", "dist", ".turbo"]
+    "exclude": ["node_modules", "dist"]
 }
