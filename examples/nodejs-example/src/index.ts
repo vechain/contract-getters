@@ -9,7 +9,7 @@ import {
     getRoundXApps,
     getTokenInfo,
     getVot3Balance,
-} from '@vechain/getters-core';
+} from '@vechain/contract-getters';
 
 const WALLET_ADDRESS = '0xF370940aBDBd2583bC80bfc19d19bc216C88Ccf0';
 const B3TR_TOKEN_ADDRESS = '0x5ef79995FE8a89e0812330E4378eB2660ceDe699'; //Mainnet B3TR
