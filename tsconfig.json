@@ -1,18 +1,21 @@
 {
-    "extends": "@tsconfig/recommended/tsconfig.json",
     "compilerOptions": {
         "outDir": "dist",
         "declaration": true,
         "declarationMap": true,
         "sourceMap": true,
         "module": "ES2022",
-        "moduleResolution": "Bundler",
+        "moduleResolution": "bundler",
         "target": "ES2022",
         "resolveJsonModule": true,
         "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true,
         "skipDefaultLibCheck": true,
         "strict": true,
+        "noEmit": false,
+        "isolatedModules": true,
         "types": []
     },
     "include": ["packages/*/src", "examples/*/src"],

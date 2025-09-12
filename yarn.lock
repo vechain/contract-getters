@@ -2350,13 +2350,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/recommended@npm:^1.0.10, @tsconfig/recommended@npm:^1.0.6":
-  version: 1.0.10
-  resolution: "@tsconfig/recommended@npm:1.0.10"
-  checksum: 10c0/402ef03da7300ea0f9f9d6e0507dcb8782c6b764c1f45b946a6c34f2bd3153571a1a85f10659606c24d1052aed699c3e32dd0da876e8f7eea577374eeeb80d17
-  languageName: node
-  linkType: hard
-
 "@typechain/ethers-v6@npm:^0.5.1":
   version: 0.5.1
   resolution: "@typechain/ethers-v6@npm:0.5.1"
@@ -2510,7 +2503,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:^24.3.1":
   version: 24.3.1
   resolution: "@types/node@npm:24.3.1"
   dependencies:
@@ -2747,7 +2740,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@vechain/contract-getters@workspace:packages/contract-getters"
   dependencies:
-    "@tsconfig/recommended": "npm:^1.0.10"
     "@types/node": "npm:^20.0.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.40.0"
     "@typescript-eslint/parser": "npm:^8.40.0"
@@ -8752,7 +8744,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "nodejs-getters-example@workspace:examples/nodejs-example"
   dependencies:
-    "@tsconfig/recommended": "npm:^1.0.6"
     "@types/node": "npm:^20.0.0"
     "@vechain/contract-getters": "workspace:*"
     "@vechain/sdk-network": "npm:^2.0.3"
@@ -11777,7 +11768,7 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A>=4.5.0#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.5.4#optional!builtin<compat/typescript>":
   version: 5.9.2
-  resolution: "typescript@patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=379a07"
+  resolution: "typescript@patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=cef18b"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -12065,6 +12056,7 @@ __metadata:
   resolution: "vechain-getters@workspace:."
   dependencies:
     "@typechain/ethers-v6": "npm:^0.5.1"
+    "@types/node": "npm:^24.3.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.40.0"
     "@typescript-eslint/parser": "npm:^8.40.0"
     b32: "github:vechain/b32"
@@ -12075,7 +12067,9 @@ __metadata:
     husky: "npm:^9.1.7"
     lint-staged: "npm:11.1.2"
     prettier: "npm:^3.6.2"
+    tsup: "npm:^8.5.0"
     typechain: "npm:^8.3.2"
+    typescript: "npm:^5.5.4"
     typescript-eslint: "npm:^8.40.0"
   languageName: unknown
   linkType: soft

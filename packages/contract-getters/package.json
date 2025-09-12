@@ -1,12 +1,13 @@
 {
     "name": "@vechain/contract-getters",
     "version": "1.0.0-beta.0",
-    "homepage": "https://github.com/vechain/vechain-kit",
+    "homepage": "https://github.com/vechain/contract-getters",
     "description": "Framework-agnostic VeChain getters (read-only).",
     "repository": "github:vechain/contract-getters",
     "license": "MIT",
     "sideEffects": false,
     "type": "module",
+    "module": "dist/index.js",
     "main": "dist/index.cjs",
     "types": "dist/index.d.ts",
     "files": [
@@ -25,7 +26,6 @@
         "ethers": "^6.0.0"
     },
     "devDependencies": {
-        "@tsconfig/recommended": "^1.0.10",
         "@types/node": "^20.0.0",
         "@typescript-eslint/eslint-plugin": "^8.40.0",
         "@typescript-eslint/parser": "^8.40.0",
@@ -39,11 +39,8 @@
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
-            "default": "./dist/index.js"
-        },
-        "./utils": {
-            "types": "./dist/utils/index.d.ts",
-            "default": "./dist/utils/index.js"
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
         }
     }
 }
