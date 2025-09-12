@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "private": true,
     "description": "Node.js example showcasing VeChain getters usage",
-    "type": "module",
     "main": "dist/index.js",
     "scripts": {
         "start": "yarn build && node dist/index.js",
