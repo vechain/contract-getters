@@ -7,9 +7,9 @@ A simple, beginner-friendly library for reading data from VeChain smart contract
 ### Installation
 
 ```bash
-yarn add @vechain/getters-core
+yarn add @vechain/contract-getters
 # or
-npm install @vechain/getters-core
+npm install @vechain/contract-getters
 ```
 
 ### Usage
@@ -19,7 +19,7 @@ There are 4 ways to use VeChain Getters, from simplest to most customized:
 #### 1. **No Client Required** (simplest - perfect for beginners):
 
 ```typescript
-import { getVot3Balance } from '@vechain/getters-core';
+import { getVot3Balance } from '@vechain/contract-getters';
 
 // Just call the function - no setup needed!
 const balance = await getVot3Balance(
@@ -31,7 +31,7 @@ console.log(`Balance: ${balance}`);
 #### 2. **Custom Network** (specify which VeChain network to use):
 
 ```typescript
-import { getVot3Balance } from '@vechain/getters-core';
+import { getVot3Balance } from '@vechain/contract-getters';
 
 const balance = await getVot3Balance(
     '0x66E9709bc01B8c0AfC99a7dC513f501821306E85',
@@ -45,7 +45,7 @@ const balance = await getVot3Balance(
 
 ```typescript
 import { ThorClient } from '@vechain/sdk-network';
-import { VeChainClient, getVot3Balance } from '@vechain/getters-core';
+import { VeChainClient, getVot3Balance } from '@vechain/contract-getters';
 
 // Use your existing ThorClient
 const thorClient = ThorClient.at('https://testnet.vechain.org');
@@ -62,7 +62,7 @@ const balance = await getVot3Balance(
 #### 4. **Custom Contract Addresses** (for testing or custom deployments):
 
 ```typescript
-import { VeChainClient, getVot3Balance } from '@vechain/getters-core';
+import { VeChainClient, getVot3Balance } from '@vechain/contract-getters';
 
 const vechainClient = VeChainClient.create({
     nodeUrl: 'https://testnet.vechain.org',
@@ -82,7 +82,7 @@ const balance = await getVot3Balance(
 
 ## 📦 Packages
 
-- **`@vechain/getters-core`** - Framework-agnostic VeChain getters library with built-in TypeScript support
+- **`@vechain/contract-getters`** - Framework-agnostic VeChain getters library with built-in TypeScript support
 
 ## 🎯 Examples
 
@@ -143,7 +143,7 @@ yarn example:nodejs
 ```
 vechain-getters/
 ├── packages/
-│   └── getters-core/          # Core getters library
+│   └── contract-getters/          # Core getters library
 │       ├── src/
 │       ├── package.json
 │       └── tsconfig.json
@@ -161,7 +161,7 @@ vechain-getters/
 
 The examples are set up and ready to showcase your getters. To add real VeChain functionality:
 
-1. **Implement getters** in `packages/getters-core/src/index.ts`:
+1. **Implement getters** in `packages/contract-getters/src/index.ts`:
 
     ```typescript
     export { createClient } from './client';

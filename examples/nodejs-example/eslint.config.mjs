@@ -4,14 +4,6 @@ export default tseslint.config(
     {
         ignores: ['dist/**'],
     },
-    {
-        languageOptions: {
-            parserOptions: {
-                tsconfigRootDir: '.',
-                project: './tsconfig.json',
-            },
-        },
-    },
     // Main configuration
     {
         extends: [...tseslint.configs.recommended],

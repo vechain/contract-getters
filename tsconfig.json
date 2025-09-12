@@ -12,7 +12,8 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "skipDefaultLibCheck": true,
-        "strict": true
+        "strict": true,
+        "types": []
     },
     "include": ["packages/*/src", "examples/*/src"],
     "exclude": ["node_modules", "dist", ".turbo"]

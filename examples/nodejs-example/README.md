@@ -72,7 +72,7 @@ nodejs-example/
 The example currently demonstrates:
 
 1. **TypeScript Integration**: Full TypeScript implementation with type annotations
-2. **Basic Import**: Importing functions from `@vechain/getters-core` with proper typing
+2. **Basic Import**: Importing functions from `@vechain/contract-getters` with proper typing
 3. **Function Calls**: Calling the `ping()` function with explicit return type
 4. **Typed Variables**: Using TypeScript type annotations for variables
 5. **Async Function Types**: Demonstrating `Promise<void>` return types
@@ -83,34 +83,39 @@ The example currently demonstrates:
 When you implement actual getters, update `src/index.ts` to include:
 
 ```typescript
-import { createClient, getAccountBalance, getLatestBlock, getTransaction } from "@vechain/getters-core"
+import {
+    createClient,
+    getAccountBalance,
+    getLatestBlock,
+    getTransaction,
+} from '@vechain/contract-getters';
 
 // Create client
 const client = createClient({
-  nodeUrl: "https://testnet.vechain.org",
-  network: "testnet",
-})
+    nodeUrl: 'https://testnet.vechain.org',
+    network: 'testnet',
+});
 
 // Example usage
 async function demonstrateGetters() {
-  try {
-    // Get latest block
-    const latestBlock = await getLatestBlock(client)
-    console.log("Latest block:", latestBlock)
+    try {
+        // Get latest block
+        const latestBlock = await getLatestBlock(client);
+        console.log('Latest block:', latestBlock);
 
-    // Get account balance
-    const balance = await getAccountBalance(client, "0x...")
-    console.log("Account balance:", balance)
+        // Get account balance
+        const balance = await getAccountBalance(client, '0x...');
+        console.log('Account balance:', balance);
 
-    // Get transaction
-    const tx = await getTransaction(client, "0x...")
-    console.log("Transaction:", tx)
-  } catch (error) {
-    console.error("Error:", error)
-  }
+        // Get transaction
+        const tx = await getTransaction(client, '0x...');
+        console.log('Transaction:', tx);
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
-demonstrateGetters()
+demonstrateGetters();
 ```
 
 ## TypeScript Support

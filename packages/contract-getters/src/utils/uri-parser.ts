@@ -1,12 +1,27 @@
-import IERC1155MetadataURIABI from '@openzeppelin/contracts/build/contracts/IERC1155MetadataURI.json';
-import IERC721MetadataABI from '@openzeppelin/contracts/build/contracts/IERC721Metadata.json';
-import { Interface, toBeHex, zeroPadValue } from 'ethers';
+import { toBeHex, zeroPadValue } from 'ethers';
 
 import { VeChainClient } from '../client';
 
-// Create interfaces using OpenZeppelin ABIs
-export const erc721Interface = new Interface(IERC721MetadataABI.abi);
-export const erc1155Interface = new Interface(IERC1155MetadataURIABI.abi);
+// Minimal ABIs for just the functions we need
+const ERC721_TOKENURI_ABI_FRAGMENT = [
+    {
+        type: 'function',
+        name: 'tokenURI',
+        stateMutability: 'view',
+        inputs: [{ name: 'tokenId', type: 'uint256' }],
+        outputs: [{ name: '', type: 'string' }],
+    },
+] as const;
+
+const ERC1155_URI_ABI_FRAGMENT = [
+    {
+        type: 'function',
+        name: 'uri',
+        stateMutability: 'view',
+        inputs: [{ name: 'id', type: 'uint256' }],
+        outputs: [{ name: '', type: 'string' }],
+    },
+] as const;
 
 /**
  * Parse avatar record and return ready-to-use data URL
@@ -46,7 +61,7 @@ export async function parseAvatarRecord(
                 if (isErc1155) {
                     const contract = enhancedClient.contracts.load(
                         contractAddress,
-                        IERC1155MetadataURIABI.abi as any,
+                        ERC1155_URI_ABI_FRAGMENT,
                     );
                     const result = await contract.read.uri(
                         BigInt(tokenId || 0),
@@ -55,7 +70,7 @@ export async function parseAvatarRecord(
                 } else {
                     const contract = enhancedClient.contracts.load(
                         contractAddress,
-                        IERC721MetadataABI.abi as any,
+                        ERC721_TOKENURI_ABI_FRAGMENT,
                     );
                     const result = await contract.read.tokenURI(
                         BigInt(tokenId || 0),

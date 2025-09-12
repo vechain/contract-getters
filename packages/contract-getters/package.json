@@ -1,5 +1,5 @@
 {
-    "name": "@vechain/getters-core",
+    "name": "@vechain/contract-getters",
     "version": "0.0.1",
     "private": false,
     "description": "Framework-agnostic VeChain getters (read-only).",
@@ -19,14 +19,16 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsup src/index.ts --dts --format esm,cjs --sourcemap",
-        "dev": "tsup src/index.ts --dts --format esm,cjs --sourcemap --watch",
+        "build": "tsup",
+        "dev": "tsup --watch",
         "typecheck": "tsc -p tsconfig.json --noEmit",
         "lint": "eslint src/**/*.ts",
         "clean": "rm -rf dist"
     },
     "peerDependencies": {
-        "@vechain/sdk-network": "^2.0.3"
+        "@vechain/sdk-network": "^2.0.3",
+        "@vechain/vebetterdao-contracts": "^7.0.2",
+        "ethers": "^6.0.0"
     },
     "devDependencies": {
         "@tsconfig/recommended": "^1.0.10",
@@ -34,11 +36,10 @@
         "@typescript-eslint/eslint-plugin": "^8.40.0",
         "@typescript-eslint/parser": "^8.40.0",
         "@vechain/sdk-network": "^2.0.3",
+        "@vechain/vebetterdao-contracts": "^7.0.2",
+        "ethers": "^6.0.0",
         "tsup": "^8.5.0",
         "typescript": "^5.5.4",
         "typescript-eslint": "^8.40.0"
-    },
-    "dependencies": {
-        "@vechain/vebetterdao-contracts": "^7.0.2"
     }
 }
