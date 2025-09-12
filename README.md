@@ -153,7 +153,6 @@ vechain-getters/
 │       ├── package.json
 │       └── README.md
 ├── package.json               # Root workspace config
-├── turbo.json                # Turbo build config
 └── README.md                 # This file
 ```
 
