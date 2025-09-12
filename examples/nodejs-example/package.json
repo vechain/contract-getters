@@ -14,7 +14,7 @@
         "clean": "rm -rf dist"
     },
     "dependencies": {
-        "@vechain/getters-core": "0.0.1",
+        "@vechain/getters-core": "*",
         "@vechain/sdk-network": "^2.0.3"
     },
     "devDependencies": {
