@@ -1,7 +1,6 @@
 name: Publish NPM Package
 
 on:
-    workflow_dispatch:
     push:
         tags:
             - '*'
