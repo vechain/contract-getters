@@ -1,1 +1,0 @@
-export { getIsPerson } from './isPerson';

@@ -116,7 +116,7 @@ coverage
 !**/integrations/coverage
 .vercel
 
-# Build folders (getters-core)
+# Build folders (contract-getters)
 
 dist/
 
