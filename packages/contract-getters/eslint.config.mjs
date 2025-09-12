@@ -2,12 +2,13 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
     {
-        ignores: ['dist/**'],
+        ignores: ['dist/**', 'src/typechain-types/**'],
     },
+
     // Main configuration
     {
         extends: [...tseslint.configs.recommended],
-        files: ['**/*.{ts,tsx,js,jsx}'],
+        files: ['src/**/*.{ts}'],
         rules: {
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/ban-ts-comment': 'off',

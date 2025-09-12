@@ -15,6 +15,6 @@
         "strict": true,
         "types": []
     },
-    "include": ["packages/*/src", "examples/*/src"],
-    "exclude": ["node_modules", "dist", ".turbo"]
+    "include": ["src"],
+    "exclude": ["src/typechain-types/**/*"]
 }
