@@ -12,7 +12,7 @@ export default defineConfig({
         '@vechain/vebetterdao-contracts',
         'ethers',
     ],
-    // Disable DTS generation due to external dependency resolution issues
-    dts: false,
+    // Enable DTS generation for TypeScript declarations
+    dts: true,
     metafile: true,
 });
