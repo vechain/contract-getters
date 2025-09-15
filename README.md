@@ -8,17 +8,25 @@ A simple, beginner-friendly library for reading data from VeChain smart contract
 
 ### Installation
 
-Install the library along with its required peer dependencies:
+1. **Install the main package:**
 
 ```bash
 # Using yarn
-yarn add @vechain/contract-getters @vechain/sdk-network @vechain/vebetterdao-contracts ethers
+yarn add @vechain/contract-getters
 
 # Using npm
-npm install @vechain/contract-getters @vechain/sdk-network @vechain/vebetterdao-contracts ethers
+npm install @vechain/contract-getters
 ```
 
-> **Note**: This library requires `@vechain/sdk-network`, `@vechain/vebetterdao-contracts`, and `ethers` as peer dependencies. Make sure to install them alongside the main package.
+2. **Install peer dependencies:**
+
+```bash
+# Using yarn
+yarn add @vechain/sdk-network @vechain/vebetterdao-contracts ethers
+
+# Using npm
+npm install @vechain/sdk-network @vechain/vebetterdao-contracts ethers
+```
 
 ### Usage
 
@@ -87,3 +95,111 @@ const balance = await getVot3Balance(
     },
 );
 ```
+
+## 📦 Packages
+
+- **`@vechain/contract-getters`** - Framework-agnostic VeChain getters library with built-in TypeScript support
+
+## 🎯 Examples
+
+Check out the `examples/nodejs-example/` folder for a complete working example that demonstrates all 4 usage patterns. You can run it with:
+
+```bash
+yarn example:nodejs
+```
+
+## 🛠️ Development
+
+### Prerequisites
+
+- Node.js 18+
+- Yarn 1.22+
+
+### Setup
+
+1. **Install dependencies:**
+
+    ```bash
+    yarn install
+    ```
+
+2. **Start core package in watch mode:**
+
+    ```bash
+    yarn core:dev
+    ```
+
+3. **Run example with hot reload:**
+    ```bash
+    yarn example:nodejs:dev
+    ```
+
+### Core Package Scripts
+
+- `yarn core:dev` - Start core package in watch mode
+- `yarn core:build` - Build core package
+- `yarn core:typecheck` - Run type checking
+
+### Available Scripts
+
+- `yarn build` - Build all packages
+- `yarn dev` - Start all packages in development mode
+- `yarn test` - Run tests for all packages
+- `yarn lint` - Lint all packages
+- `yarn typecheck` - Type check all packages
+- `yarn clean` - Clean build artifacts
+
+### Example Scripts
+
+- `yarn example:nodejs` - Run Node.js example
+- `yarn example:nodejs:dev` - Run Node.js example with hot reload
+
+## 📁 Project Structure
+
+```
+vechain-getters/
+├── packages/
+│   └── contract-getters/          # Core getters library
+│       ├── src/
+│       ├── package.json
+│       └── tsconfig.json
+├── examples/
+│   └── nodejs-example/        # Node.js example app
+│       ├── src/
+│       ├── package.json
+│       └── README.md
+├── package.json               # Root workspace config
+└── README.md                 # This file
+```
+
+## 🔧 Adding VeChain Getters
+
+The examples are set up and ready to showcase your getters. To add real VeChain functionality:
+
+1. **Implement getters** in `packages/contract-getters/src/index.ts`:
+
+    ```typescript
+    export { createClient } from './client';
+    export { getAccountBalance } from './getters/account';
+    export { getLatestBlock } from './getters/block';
+    export { getTransaction } from './getters/transaction';
+    ```
+
+2. **Update examples** to use the new getters:
+    - Update imports in both example applications
+    - Add real VeChain network calls
+    - Implement proper error handling and loading states
+
+3. **Add TypeScript types** for better developer experience
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+MIT License - see the [LICENSE](LICENSE) file for details.

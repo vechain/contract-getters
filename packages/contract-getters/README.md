@@ -8,17 +8,25 @@ A simple, beginner-friendly library for reading data from VeChain smart contract
 
 ### Installation
 
-Install the library along with its required peer dependencies:
+1. **Install the main package:**
 
 ```bash
 # Using yarn
-yarn add @vechain/contract-getters @vechain/sdk-network @vechain/vebetterdao-contracts ethers
+yarn add @vechain/contract-getters
 
 # Using npm
-npm install @vechain/contract-getters @vechain/sdk-network @vechain/vebetterdao-contracts ethers
+npm install @vechain/contract-getters
 ```
 
-> **Note**: This library requires `@vechain/sdk-network`, `@vechain/vebetterdao-contracts`, and `ethers` as peer dependencies. Make sure to install them alongside the main package.
+2. **Install peer dependencies:**
+
+```bash
+# Using yarn
+yarn add @vechain/sdk-network @vechain/vebetterdao-contracts ethers
+
+# Using npm
+npm install @vechain/sdk-network @vechain/vebetterdao-contracts ethers
+```
 
 ### Usage
 
