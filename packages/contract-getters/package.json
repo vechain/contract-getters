@@ -3,7 +3,10 @@
     "version": "1.0.0-beta.0",
     "homepage": "https://github.com/vechain/contract-getters",
     "description": "Framework-agnostic VeChain getters (read-only).",
-    "repository": "github:vechain/contract-getters",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vechain/contract-getters.git"
+    },
     "license": "MIT",
     "sideEffects": false,
     "module": "dist/index.mjs",
