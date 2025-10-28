@@ -24,20 +24,20 @@ const mainnetAddresses: ContractAddressesConfig = {
     veBetterPassportContractAddress:
         '0x35a267671d8EDD607B2056A9a13E7ba7CF53c8b3', // VeBetter Passport
     b3trGovernorLibraries: {
-        governorClockLogicAddress: '0xed6137b125bc40834fa06e800c5a72013ef9d91c',
+        governorClockLogicAddress: '0xaa5621bfa33b3166c7ffb0a846e4eeeb5289218e',
         governorConfiguratorAddress:
-            '0xc2428c4608f97d21034ae32f104587c9c045a8a2',
+            '0xc9528bd01d22eb049086ac5b877b6a3748c33a1f',
         governorDepositLogicAddress:
-            '0x00f1cf9847b149e594c23a15db0976a2ae0b49b2',
+            '0xecdcdba1b77cdffc64a5b9083f38e2b2cecd6586',
         governorFunctionRestrictionsLogicAddress:
-            '0x1a430095eed7f87f5b41a3025c1463f68bbc2a1e',
+            '0x1b7db0055dd153b3e4dd2c9eb900fcab28ea0072',
         governorProposalLogicAddressAddress:
-            '0xe37a44f0ec996ef8618e083d9d7406db1ccc395d',
+            '0x939d3ae052a6632895c02704e93cb766205ef2b8',
         governorQuorumLogicAddress:
-            '0xfbb42dc5e87105a270cab3422cc3e3b51b8af152',
-        governorStateLogicAddress: '0x38e4cfebcc414902d2846b699224b26a10144ff1',
-        governorVotesLogicAddress: '0x5d340fa12d11a4bab44ce8c907380a47226ef44c',
-    }, // B3TR Governor Libraries
+            '0xf85f6d18d9f49a897172c6d2c4ff201206b3d896',
+        governorStateLogicAddress: '0x04c3a64ce6c36c0a087dcd3b73ea7525a617ef5e',
+        governorVotesLogicAddress: '0x4c277a44faf0d657b3761206dbe7011f51153e3c',
+    },
     passportLibraries: {
         passportChecksLogicAddress:
             '0xDB5b259E4BfbfD8353cfcea695bbB583eE58F77a',
@@ -56,9 +56,15 @@ const mainnetAddresses: ContractAddressesConfig = {
         passportWhitelistAndBlacklistLogicAddress:
             '0x2D326f99e4251436F03eaab8b1af6875D984fD84',
     }, // Passport Libraries
+    xAllocationVotingLibraries: {
+        autoVotingLogicAddress: '0x5584e3aab6a24e66959147ce3eee3b1698294a9b',
+    },
     b3trMultiSigAddress: '0x4Dd13fcb7b4f7DC19048ce0d23aAEbbDB3f3a1d9', // B3TR MultiSig //TODO: Do we need this?
     stargateNFTContractAddress: '0x1856c533ac2d94340aaa8544d35a5c1d4a21dee7', // Stargate NFT
     grantsManagerContractAddress: '0x055d20914657834c914d7c44bf65b566ab4b45a2', // Grants Manager
+    relayerRewardsPoolContractAddress:
+        '0x34b56f892c9e977b9ba2e43ba64c27d368ab3c86', // Relayer Rewards Pool
+    dbaPoolContractAddress: '0x98c1d097c39969bb5de754266f60d22bd105b368',
 
     //===============EXTERNAL CONTRACTS===============
 

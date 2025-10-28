@@ -20,6 +20,10 @@ type PassportLibraries = {
     passportWhitelistAndBlacklistLogicAddress: string;
 };
 
+type XAllocationVotingLibraries = {
+    autoVotingLogicAddress: string;
+};
+
 export type ContractAddressesConfig = {
     //===============INTERNAL CONTRACTS===============
     //VeBetterDAO Contracts
@@ -44,6 +48,9 @@ export type ContractAddressesConfig = {
     b3trMultiSigAddress?: string; // B3TR MultiSig //TODO: Do we need this?
     stargateNFTContractAddress: string; // Stargate NFT
     grantsManagerContractAddress: string; // Grants Manager
+    relayerRewardsPoolContractAddress: string; // Relayer Rewards Pool
+    dbaPoolContractAddress: string; // DBA Pool
+    xAllocationVotingLibraries: XAllocationVotingLibraries; // X Allocation Voting Libraries
 
     //===============EXTERNAL CONTRACTS===============
 
