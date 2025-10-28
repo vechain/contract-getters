@@ -2350,20 +2350,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typechain/ethers-v6@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "@typechain/ethers-v6@npm:0.5.1"
-  dependencies:
-    lodash: "npm:^4.17.15"
-    ts-essentials: "npm:^7.0.1"
-  peerDependencies:
-    ethers: 6.x
-    typechain: ^8.3.2
-    typescript: ">=4.7.0"
-  checksum: 10c0/f3c80151c07e01adbf520e0854426649edb0ee540920569487dd8da7eca2fa8615710f4c0eda008e7afdf255fbb8dfdebf721a5d324a4dffeb087611d9bd64b9
-  languageName: node
-  linkType: hard
-
 "@typechain/hardhat@npm:^8.0.0":
   version: 8.0.3
   resolution: "@typechain/hardhat@npm:8.0.3"
@@ -2928,6 +2914,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vechain/vechain-contract-types@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@vechain/vechain-contract-types@npm:1.1.0"
+  dependencies:
+    ethers: "npm:^6.13.5"
+  peerDependencies:
+    ethers: ^6.0.0
+  checksum: 10c0/17f3fc7534fbd5729a0254b70ddd83e74df1ec32b1c8264ee4157deffa7368bdca55fbb0e3230a0fff6a9e991b19e9cd90852bfc005dc0a5cdc91542c5639497
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:1":
   version: 1.1.1
   resolution: "abbrev@npm:1.1.1"
@@ -3384,13 +3381,6 @@ __metadata:
     form-data: "npm:^4.0.4"
     proxy-from-env: "npm:^1.1.0"
   checksum: 10c0/eda4dff56c02d13b950fd9487b678ac197ce5f21dfc98df73632df29e45d8dd24602a34e8d9b6e016d84a41ef7fd7fc4a7618060a72cc536b91cda1eaa9cd907
-  languageName: node
-  linkType: hard
-
-"b32@github:vechain/b32":
-  version: 0.1.0
-  resolution: "b32@https://github.com/vechain/b32.git#commit=dcfa8444e7ad0c53aa9c2ba524ac88ea6121f0b1"
-  checksum: 10c0/ef75cffddea41bc04c50095e8c2988f32fe4f38435b162c1273f1a10dfc5b3776fc47dcf0fc0a15b4d654f74b33ec21bbd7d5ad873450047e3e6331e23dd2e13
   languageName: node
   linkType: hard
 
@@ -5679,7 +5669,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethers@npm:^6.0.0, ethers@npm:^6.13.0, ethers@npm:^6.14.0":
+"ethers@npm:^6.0.0, ethers@npm:^6.13.0, ethers@npm:^6.13.5, ethers@npm:^6.14.0":
   version: 6.15.0
   resolution: "ethers@npm:6.15.0"
   dependencies:
@@ -12055,11 +12045,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vechain-getters@workspace:."
   dependencies:
-    "@typechain/ethers-v6": "npm:^0.5.1"
     "@types/node": "npm:^24.3.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.40.0"
     "@typescript-eslint/parser": "npm:^8.40.0"
-    b32: "github:vechain/b32"
+    "@vechain/vechain-contract-types": "npm:1.1.0"
     eslint: "npm:^9.12.0"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-prettier: "npm:^5.5.4"

@@ -1,7 +1,7 @@
 import { isAddress, ZeroAddress } from 'ethers';
 
 import { getOrCreateClient } from '../client/utils';
-import { VetDomainsResolveUtilities__factory } from '../typechain-types/factories/VetDomainsResolveUtilities__factory';
+import { VetDomainsResolveUtilities__factory } from '@vechain/vechain-contract-types/factories/b32/ABIs/VetDomainsResolveUtilities__factory';
 import { GetterOptions } from '../types/common';
 
 /**
