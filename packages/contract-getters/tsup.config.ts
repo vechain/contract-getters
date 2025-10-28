@@ -9,7 +9,7 @@ export default defineConfig({
     minify: true,
     external: [
         '@vechain/sdk-network',
-        '@vechain/vebetterdao-contracts',
+        '@vechain/vechain-contract-types',
         'ethers',
     ],
     // Enable DTS generation for TypeScript declarations
