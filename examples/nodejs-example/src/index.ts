@@ -9,6 +9,7 @@ import {
     getRoundXApps,
     getTokenInfo,
     getVot3Balance,
+    isRewardClaimable,
 } from '@vechain/contract-getters';
 
 const WALLET_ADDRESS = '0xF370940aBDBd2583bC80bfc19d19bc216C88Ccf0';
@@ -103,6 +104,16 @@ async function runVetDomainsExample() {
     console.info(`Avatar: ${avatar ? avatar.slice(0, 30) + '...' : 'None'}`);
 }
 
+async function runRelayerRewardsPoolExample() {
+    console.info('\n🏊 RelayerRewardsPool Contract Usage');
+    console.info('─'.repeat(40));
+
+    console.info(`Checking if reward is claimable for round ${ROUND_ID}...`);
+    const isClaimable = await isRewardClaimable(ROUND_ID);
+    console.info(
+        `Is reward for round ${ROUND_ID} claimable: ${isClaimable ? 'Yes ✅' : 'No ❌'}`,
+    );
+}
 async function main() {
     console.info('🔗 VeChain Contract Getters - All Examples');
     console.info('═'.repeat(50));
@@ -115,7 +126,7 @@ async function main() {
         await runErc20Example();
         await runVeBetterPassportExample();
         await runVetDomainsExample();
-
+        await runRelayerRewardsPoolExample();
         console.info('\n✨ All contract examples completed successfully!');
     } catch (error) {
         console.error(

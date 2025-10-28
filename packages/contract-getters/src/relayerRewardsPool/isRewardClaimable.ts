@@ -1,15 +1,17 @@
+import { RelayerRewardsPool__factory } from '@vechain/vechain-contract-types/factories/@vechain/vebetterdao-contracts/dist/esm/artifacts/contracts/RelayerRewardsPool__factory';
+
 import { getOrCreateClient } from '../client/utils';
 import { GetterOptions } from '../types/common';
 
 /**
  * Check if a reward is claimable for a given address
  * @param tokenAddress - The token contract address
- * @param address - The address to check reward claimability for
+ * @param roundId - The round ID to check reward claimability for
  * @param options - Optional client and network configuration
  * @returns Promise<boolean> - Whether the reward is claimable
  */
 export const isRewardClaimable = async (
-    address: string,
+    roundId: string,
     options?: GetterOptions,
 ): Promise<boolean> => {
     const enhancedClient = getOrCreateClient(
@@ -17,12 +19,12 @@ export const isRewardClaimable = async (
         options?.networkUrl,
     );
 
-    const result: readonly [boolean, string] = await enhancedClient.contracts
+    const result = await enhancedClient.contracts
         .load(
             enhancedClient.contractAddresses.relayerRewardsPoolContractAddress,
             RelayerRewardsPool__factory.abi,
         )
-        .read.isRewardClaimable(address);
+        .read.isRewardClaimable(BigInt(roundId));
 
     return result[0];
 };

@@ -8,3 +8,4 @@ export * from './erc20';
 // export * from './oracle';
 export * from './veBetterPassport';
 export * from './vetDomain';
+export * from './relayerRewardsPool';
