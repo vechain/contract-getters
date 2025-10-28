@@ -1,4 +1,4 @@
-import { VOT3__factory } from '@vechain/vebetterdao-contracts';
+import { VOT3__factory } from '@vechain/vechain-contract-types/factories/@vechain/vebetterdao-contracts/dist/esm/artifacts/contracts/VOT3__factory';
 
 import { getOrCreateClient } from '../client/utils';
 import { GetterOptions } from '../types/common';

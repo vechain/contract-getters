@@ -1,4 +1,4 @@
-import { XAllocationPool__factory } from '@vechain/vebetterdao-contracts';
+import { XAllocationPool__factory } from '@vechain/vechain-contract-types/factories/@vechain/vebetterdao-contracts/dist/esm/artifacts/contracts/XAllocationPool__factory';
 
 import { getOrCreateClient } from '../client/utils';
 import { GetterOptions } from '../types/common';
