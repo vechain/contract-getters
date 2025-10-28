@@ -59,6 +59,12 @@ const testnetAddresses: ContractAddressesConfig = {
     b3trMultiSigAddress: '0x4Dd13fcb7b4f7DC19048ce0d23aAEbbDB3f3a1d9', // B3TR MultiSig //TODO: Do we need this?
     stargateNFTContractAddress: '0x1856c533ac2d94340aaa8544d35a5c1d4a21dee7', // Stargate NFT
     grantsManagerContractAddress: '0x055d20914657834c914d7c44bf65b566ab4b45a2', // Grants Manager
+    relayerRewardsPoolContractAddress:
+        '0x0000000000000000000000000000000000000000', // Relayer Rewards Pool
+    dbaPoolContractAddress: '0x0000000000000000000000000000000000000000', // DBA Pool
+    xAllocationVotingLibraries: {
+        autoVotingLogicAddress: '0x0000000000000000000000000000000000000000',
+    },
 
     //===============EXTERNAL CONTRACTS===============
 
