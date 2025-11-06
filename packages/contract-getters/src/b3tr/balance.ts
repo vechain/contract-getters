@@ -1,4 +1,4 @@
-import { B3TR__factory } from '@vechain/vechain-contract-types/factories/@vechain/vebetterdao-contracts/dist/esm/artifacts/contracts/B3TR__factory';
+import { B3TR__factory } from '@vechain/vechain-contract-types';
 
 import { getOrCreateClient } from '../client/utils';
 import { GetterOptions } from '../types/common';

@@ -8,6 +8,12 @@
         "url": "git+https://github.com/vechain/contract-getters.git"
     },
     "license": "MIT",
+    "keywords": [
+        "vechain",
+        "contracts",
+        "getters",
+        "web3"
+    ],
     "sideEffects": false,
     "module": "dist/index.mjs",
     "main": "dist/index.js",

@@ -1,4 +1,4 @@
-import { VeBetterPassport__factory } from '@vechain/vechain-contract-types/factories/@vechain/vebetterdao-contracts/dist/esm/artifacts/contracts/ve-better-passport/VeBetterPassport__factory';
+import { VeBetterPassport__factory } from '@vechain/vechain-contract-types';
 
 import { getOrCreateClient } from '../client/utils';
 import { GetterOptions } from '../types/common';

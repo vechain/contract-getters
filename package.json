@@ -33,7 +33,7 @@
         "@types/node": "^24.3.1",
         "@typescript-eslint/eslint-plugin": "^8.40.0",
         "@typescript-eslint/parser": "^8.40.0",
-        "@vechain/vechain-contract-types": "1.1.0",
+        "@vechain/vechain-contract-types": "1.2.4",
         "eslint": "^9.12.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.4",

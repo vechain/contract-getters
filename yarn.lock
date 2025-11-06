@@ -950,14 +950,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vechain/vechain-contract-types@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@vechain/vechain-contract-types@npm:1.1.0"
+"@vechain/vechain-contract-types@npm:1.2.4":
+  version: 1.2.4
+  resolution: "@vechain/vechain-contract-types@npm:1.2.4"
   dependencies:
     ethers: "npm:^6.13.5"
   peerDependencies:
     ethers: ^6.0.0
-  checksum: 10c0/17f3fc7534fbd5729a0254b70ddd83e74df1ec32b1c8264ee4157deffa7368bdca55fbb0e3230a0fff6a9e991b19e9cd90852bfc005dc0a5cdc91542c5639497
+  checksum: 10c0/7fcbe27008ddbf8328c919bb61900a2ea9e5671d9a359379a3c251eff1871b315abcc0e94f6e42bbb94421f67404165d3e16a10b41518dfc7b909399c492a598
   languageName: node
   linkType: hard
 
@@ -3775,7 +3775,7 @@ __metadata:
     "@types/node": "npm:^24.3.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.40.0"
     "@typescript-eslint/parser": "npm:^8.40.0"
-    "@vechain/vechain-contract-types": "npm:1.1.0"
+    "@vechain/vechain-contract-types": "npm:1.2.4"
     eslint: "npm:^9.12.0"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-prettier: "npm:^5.5.4"
