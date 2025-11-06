@@ -1,11 +1,14 @@
+import {
+    VetDomainsPublicResolver__factory,
+    VetDomainsRegistry__factory,
+} from '@vechain/vechain-contract-types';
 import { isAddress, namehash, ZeroAddress } from 'ethers';
 
 import { VeChainClient } from '../client';
 import { getOrCreateClient } from '../client/utils';
 import { GetterOptions } from '../types/common';
 import { convertUrlToBase64, parseAvatarRecord } from '../utils';
-import { VetDomainsRegistry__factory } from '@vechain/vechain-contract-types/factories/b32/ABIs/VetDomainsRegistry__factory';
-import { VetDomainsPublicResolver__factory } from '@vechain/vechain-contract-types/factories/b32/ABIs/VetDomainsPublicResolver__factory';
+
 /**
  * Get avatar for a VET domain
  * @param domain - The VET domain name to get avatar for
