@@ -888,12 +888,14 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.40.0"
     "@typescript-eslint/parser": "npm:^8.40.0"
     "@vechain/sdk-network": "npm:^2.0.3"
+    "@vechain/vechain-contract-types": "npm:^1.2.4"
     ethers: "npm:^6.0.0"
     tsup: "npm:^8.5.0"
     typescript: "npm:^5.5.4"
     typescript-eslint: "npm:^8.40.0"
   peerDependencies:
     "@vechain/sdk-network": ^2.0.3
+    "@vechain/vechain-contract-types": ^1.2.4
     ethers: ^6.0.0
   languageName: unknown
   linkType: soft
@@ -958,6 +960,17 @@ __metadata:
   peerDependencies:
     ethers: ^6.0.0
   checksum: 10c0/7fcbe27008ddbf8328c919bb61900a2ea9e5671d9a359379a3c251eff1871b315abcc0e94f6e42bbb94421f67404165d3e16a10b41518dfc7b909399c492a598
+  languageName: node
+  linkType: hard
+
+"@vechain/vechain-contract-types@npm:^1.2.4":
+  version: 1.2.5
+  resolution: "@vechain/vechain-contract-types@npm:1.2.5"
+  dependencies:
+    ethers: "npm:^6.13.5"
+  peerDependencies:
+    ethers: ^6.0.0
+  checksum: 10c0/0db26dea31c7dced1d9252d203bb6c23ffd5ce7ba5c0c629b65f6d7fe5c6e47b9676ae182845132f1663ebc53c51d4d282a3612a9b1734a6c95636525dc13a9d
   languageName: node
   linkType: hard
 
