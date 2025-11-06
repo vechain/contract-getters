@@ -2,8 +2,6 @@
 
 A simple, beginner-friendly library for reading data from VeChain smart contracts. No complex setup required - just install and call functions! Works with any JavaScript/TypeScript project and integrates seamlessly with existing VeChain SDK projects.
 
-**✨ Lightweight**: Only 7.5k (3.2k gzipped) - minimal impact on your bundle size!
-
 ## 🚀 Getting Started
 
 ### Installation
@@ -22,10 +20,10 @@ npm install @vechain/contract-getters
 
 ```bash
 # Using yarn
-yarn add @vechain/sdk-network @vechain/vebetterdao-contracts ethers
+yarn add @vechain/sdk-network ethers
 
 # Using npm
-npm install @vechain/sdk-network @vechain/vebetterdao-contracts ethers
+npm install @vechain/sdk-network ethers
 ```
 
 ### Usage
