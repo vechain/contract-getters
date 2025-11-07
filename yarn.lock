@@ -887,15 +887,15 @@ __metadata:
     "@types/node": "npm:^20.0.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.40.0"
     "@typescript-eslint/parser": "npm:^8.40.0"
-    "@vechain/sdk-network": "npm:^2.0.3"
-    "@vechain/vechain-contract-types": "npm:^1.2.4"
+    "@vechain/sdk-network": "npm:^2.0.5"
+    "@vechain/vechain-contract-types": "npm:^1.2.5"
     ethers: "npm:^6.0.0"
     tsup: "npm:^8.5.0"
     typescript: "npm:^5.5.4"
     typescript-eslint: "npm:^8.40.0"
   peerDependencies:
-    "@vechain/sdk-network": ^2.0.3
-    "@vechain/vechain-contract-types": ^1.2.4
+    "@vechain/sdk-network": ^2.0.5
+    "@vechain/vechain-contract-types": ^1.2.5
     ethers: ^6.0.0
   languageName: unknown
   linkType: soft
@@ -937,7 +937,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vechain/sdk-network@npm:^2.0.3":
+"@vechain/sdk-network@npm:^2.0.3, @vechain/sdk-network@npm:^2.0.5":
   version: 2.0.5
   resolution: "@vechain/sdk-network@npm:2.0.5"
   dependencies:
@@ -963,7 +963,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vechain/vechain-contract-types@npm:^1.2.4":
+"@vechain/vechain-contract-types@npm:^1.2.5":
   version: 1.2.5
   resolution: "@vechain/vechain-contract-types@npm:1.2.5"
   dependencies:
