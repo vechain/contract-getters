@@ -20,10 +20,10 @@ npm install @vechain/contract-getters
 
 ```bash
 # Using yarn
-yarn add @vechain/sdk-network ethers
+yarn add @vechain/vechain-contract-types @vechain/sdk-network ethers
 
 # Using npm
-npm install @vechain/sdk-network ethers
+npm install @vechain/vechain-contract-types @vechain/sdk-network ethers
 ```
 
 ### Usage
