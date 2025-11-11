@@ -30,7 +30,7 @@
     },
     "peerDependencies": {
         "@vechain/sdk-network": "^2.0.5",
-        "@vechain/vechain-contract-types": "^1.2.5",
+        "@vechain/vechain-contract-types": "^1.4.1",
         "ethers": "^6.0.0"
     },
     "devDependencies": {
@@ -38,7 +38,7 @@
         "@typescript-eslint/eslint-plugin": "^8.40.0",
         "@typescript-eslint/parser": "^8.40.0",
         "@vechain/sdk-network": "^2.0.5",
-        "@vechain/vechain-contract-types": "^1.2.5",
+        "@vechain/vechain-contract-types": "^1.4.1",
         "ethers": "^6.0.0",
         "tsup": "^8.5.0",
         "typescript": "^5.5.4",
