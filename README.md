@@ -170,25 +170,54 @@ vechain-getters/
 └── README.md                 # This file
 ```
 
-## 🔧 Adding VeChain Getters
+## 🔧 Adding New Contract Getters
 
-The examples are set up and ready to showcase your getters. To add real VeChain functionality:
+This library provides getters for specific VeChain smart contracts. To add support for new contracts:
 
-1. **Implement getters** in `packages/contract-getters/src/index.ts`:
+1. **Create a new contract module** in `packages/contract-getters/src/`:
 
     ```typescript
-    export { createClient } from './client';
-    export { getAccountBalance } from './getters/account';
-    export { getLatestBlock } from './getters/block';
-    export { getTransaction } from './getters/transaction';
+    // packages/contract-getters/src/myContract/balance.ts
+    import { type GetterOptions } from '../types/common';
+    import { createVeChainClient } from '../client';
+
+    export async function getMyContractBalance(
+        address: string,
+        options?: GetterOptions,
+    ): Promise<bigint> {
+        const client = createVeChainClient(options);
+
+        // Contract interaction logic here
+        // Let smart contract errors bubble up naturally
+        const result = await client.contracts.myContract.balanceOf(address);
+        return result;
+    }
     ```
 
-2. **Update examples** to use the new getters:
-    - Update imports in both example applications
-    - Add real VeChain network calls
-    - Implement proper error handling and loading states
+2. **Export from module index**:
 
-3. **Add TypeScript types** for better developer experience
+    ```typescript
+    // packages/contract-getters/src/myContract/index.ts
+    export { getMyContractBalance } from './balance';
+    ```
+
+3. **Add to main exports** in `packages/contract-getters/src/index.ts`:
+
+    ```typescript
+    export * from './myContract';
+    ```
+
+4. **Update examples** to demonstrate the new getter:
+    - Add usage examples in `examples/nodejs-example/src/index.ts`
+    - Follow existing patterns for error handling and output formatting
+
+**Guidelines:**
+
+- Keep functions simple and focused on single contract calls
+- Let smart contract errors propagate naturally (don't catch unless necessary)
+- Use consistent parameter patterns (`address`, `options?`)
+- Add proper TypeScript types for all parameters and return values
+- Follow existing naming conventions (`get[Contract][Function]`)
 
 ## 🤝 Contributing
 
