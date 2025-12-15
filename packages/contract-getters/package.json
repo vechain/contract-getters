@@ -29,16 +29,16 @@
         "clean": "rm -rf dist"
     },
     "peerDependencies": {
-        "@vechain/sdk-network": "^2.0.5",
-        "@vechain/vechain-contract-types": "^1.4.1",
+        "@vechain/sdk-network": "^2.0.7",
+        "@vechain/vechain-contract-types": "^1.5.0",
         "ethers": "^6.0.0"
     },
     "devDependencies": {
         "@types/node": "^20.0.0",
         "@typescript-eslint/eslint-plugin": "^8.40.0",
         "@typescript-eslint/parser": "^8.40.0",
-        "@vechain/sdk-network": "^2.0.5",
-        "@vechain/vechain-contract-types": "^1.4.1",
+        "@vechain/sdk-network": "^2.0.7",
+        "@vechain/vechain-contract-types": "^1.5.0",
         "ethers": "^6.0.0",
         "tsup": "^8.5.0",
         "typescript": "^5.5.4",
