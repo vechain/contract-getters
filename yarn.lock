@@ -887,15 +887,15 @@ __metadata:
     "@types/node": "npm:^20.0.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.40.0"
     "@typescript-eslint/parser": "npm:^8.40.0"
-    "@vechain/sdk-network": "npm:^2.0.5"
-    "@vechain/vechain-contract-types": "npm:^1.4.1"
+    "@vechain/sdk-network": "npm:^2.0.7"
+    "@vechain/vechain-contract-types": "npm:^1.5.0"
     ethers: "npm:^6.0.0"
     tsup: "npm:^8.5.0"
     typescript: "npm:^5.5.4"
     typescript-eslint: "npm:^8.40.0"
   peerDependencies:
-    "@vechain/sdk-network": ^2.0.5
-    "@vechain/vechain-contract-types": ^1.4.1
+    "@vechain/sdk-network": ^2.0.7
+    "@vechain/vechain-contract-types": ^1.5.0
     ethers: ^6.0.0
   languageName: unknown
   linkType: soft
@@ -921,10 +921,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vechain/sdk-core@npm:2.0.7":
+  version: 2.0.7
+  resolution: "@vechain/sdk-core@npm:2.0.7"
+  dependencies:
+    "@ethereumjs/rlp": "npm:^5.0.2"
+    "@noble/ciphers": "npm:^1.1.1"
+    "@noble/curves": "npm:^1.6.0"
+    "@noble/hashes": "npm:^1.5.0"
+    "@scure/base": "npm:^1.2.4"
+    "@scure/bip32": "npm:^1.4.0"
+    "@scure/bip39": "npm:^1.5.1"
+    "@vechain/sdk-errors": "npm:2.0.7"
+    "@vechain/sdk-logging": "npm:2.0.7"
+    abitype: "npm:^1.0.6"
+    ethers: "npm:^6.14.0"
+    fast-json-stable-stringify: "npm:^2.1.0"
+    viem: "npm:^2.21.45"
+  checksum: 10c0/7286fb045b07938cfe28b3eb17295691fe1f4eb19df8afc8c406e548e8f23632a13a4703033be26ff2adf36e04c977a6c40ec763262b8d6c92209db3e9f532ba
+  languageName: node
+  linkType: hard
+
 "@vechain/sdk-errors@npm:2.0.5":
   version: 2.0.5
   resolution: "@vechain/sdk-errors@npm:2.0.5"
   checksum: 10c0/c991e6346b2b392816479cb8faa5b95b74827262f303960c2ac12b578977f6d6b92bdc9aa43035bd54c6a2ebe81cbb9bf9f76eb91f3419d1a022d91b3ba81c67
+  languageName: node
+  linkType: hard
+
+"@vechain/sdk-errors@npm:2.0.7":
+  version: 2.0.7
+  resolution: "@vechain/sdk-errors@npm:2.0.7"
+  checksum: 10c0/9408bf926cd5662b6f5c96bd309e24f8b18b3dae0dc094621431aa8b607a90c325c3b5c14c609df665556432f43da1be81ba14fa0b6fa2d166c61b31eef53e2b
   languageName: node
   linkType: hard
 
@@ -937,7 +965,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vechain/sdk-network@npm:^2.0.3, @vechain/sdk-network@npm:^2.0.5":
+"@vechain/sdk-logging@npm:2.0.7":
+  version: 2.0.7
+  resolution: "@vechain/sdk-logging@npm:2.0.7"
+  dependencies:
+    "@vechain/sdk-errors": "npm:2.0.7"
+  checksum: 10c0/0b1c589f8a833ea4e17f0d176273a9508d6314f0ed7cf97a531c83df827d3540d50f54511cdd2f7238a73b6e1cd6617b47ed823117bce76784cad842e0b89712
+  languageName: node
+  linkType: hard
+
+"@vechain/sdk-network@npm:^2.0.3":
   version: 2.0.5
   resolution: "@vechain/sdk-network@npm:2.0.5"
   dependencies:
@@ -952,7 +989,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vechain/vechain-contract-types@npm:1.4.1, @vechain/vechain-contract-types@npm:^1.4.1":
+"@vechain/sdk-network@npm:^2.0.7":
+  version: 2.0.7
+  resolution: "@vechain/sdk-network@npm:2.0.7"
+  dependencies:
+    "@noble/curves": "npm:^1.6.0"
+    "@vechain/sdk-core": "npm:2.0.7"
+    "@vechain/sdk-errors": "npm:2.0.7"
+    "@vechain/sdk-logging": "npm:2.0.7"
+    abitype: "npm:1.0.8"
+    ethers: "npm:^6.14.0"
+    viem: "npm:^2.21.54"
+  checksum: 10c0/dbf67ec161bdb200a807f308945a811c6ee12d120bf18da9b685796e222ef3985dc5bebf2639d0c0f33bea3b8b50827e0ad9690ba348bd2fde1e9aeb9a3a616e
+  languageName: node
+  linkType: hard
+
+"@vechain/vechain-contract-types@npm:1.4.1":
   version: 1.4.1
   resolution: "@vechain/vechain-contract-types@npm:1.4.1"
   dependencies:
@@ -960,6 +1012,17 @@ __metadata:
   peerDependencies:
     ethers: ^6.0.0
   checksum: 10c0/b710b07b43a48cd6903604cdad1fd563fda1d160020a8c8a343b909e406fe18709f39fa20752a7e90778a846b72195cb2bcab5d67afbc72e4a8619e7b8c96937
+  languageName: node
+  linkType: hard
+
+"@vechain/vechain-contract-types@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "@vechain/vechain-contract-types@npm:1.5.0"
+  dependencies:
+    ethers: "npm:^6.13.5"
+  peerDependencies:
+    ethers: ^6.0.0
+  checksum: 10c0/b33ae8e047ab2468f3c4ba2598489e14e689b771446f913e252bd31f29c36c626335b4d989aeeb2d9d05063af7aa767414477c8bb6d68ed5ad6ef5f0311307a4
   languageName: node
   linkType: hard
 
