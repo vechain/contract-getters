@@ -3,67 +3,54 @@ import { ContractAddressesConfig } from './type';
 const testnetAddresses: ContractAddressesConfig = {
     //===============INTERNAL CONTRACTS===============
     //VeBetterDAO Contracts
-    b3trContractAddress: '0xbf64cf86894Ee0877C4e7d03936e35Ee8D8b864F', // B3TR
-    vot3ContractAddress: '0xa704c45971995467696EE9544Da77DD42Bc9706E', // VOT3
-    b3trGovernorAddress: '0xDF5E114D391CAC840529802fe8D01f6bdeBE41eC', // B3TR Governor
-    timelockContractAddress: '0x30ee94F303643902a68aD8A7A6456cA69d763192', // Timelock
+    b3trContractAddress: '0x95761346d18244bb91664181bf91193376197088',
+    vot3ContractAddress: '0x6e8b4a88d37897fc11f6ba12c805695f1c41f40e',
+    b3trGovernorAddress: '0xc30b4d0837f7e3706749655d8bde0c0f265dd81b',
+    timelockContractAddress: '0x835509222aa67c333a1cbf29bd341e014aba86c9',
     xAllocationPoolContractAddress:
-        '0x9B9CA9D0C41Add1d204f90BA0E9a6844f1843A84', // X Allocation Pool
+        '0x6f7b4bc19b4dc99005b473b9c45ce2815bbe7533',
     xAllocationVotingContractAddress:
-        '0x5859ff910d8b0c127364c98E24233b0af7443c1c', // X Allocation Voting
-    emissionsContractAddress: '0x3D7616213191a10460e49CfdB7edBf88D6a10942', // Emissions
-    voterRewardsContractAddress: '0x2E47fc4aabB3403037fB5E1f38995E7a91Ce8Ed2', // Voter Rewards
-    galaxyMemberContractAddress: '0xa9aC49C030c1148b95F056E86f2531f8F3d5bf27', // Galaxy Member
-    treasuryContractAddress: '0x039893EBe092A2D22B08E2b029735D211bfF7F50', // Treasury
-    x2EarnAppsContractAddress: '0xcB23Eb1bBD5c07553795b9538b1061D0f4ABA153', // X2Earn Apps
-    x2EarnCreatorContractAddress: '', // X2Earn Creator
+        '0x8800592c463f0b21ae08732559ee8e146db1d7b2',
+    emissionsContractAddress: '0x66898f98409db20ed6a1bf0021334b7897eb0688',
+    voterRewardsContractAddress: '0x851ef91801899a4e7e4a3174a9300b3e20c957e8',
+    galaxyMemberContractAddress: '0x38a59fa7fd7039884465a0ff285b8c4b6fe394ca',
+    x2EarnCreatorContractAddress: '0xb89f0ecdaf9987f87912d6c77756435fe4085b05',
+    nodeManagementContractAddress: '0xde17d0a516c38c168d37685bb71465f656aa256e',
+    x2EarnAppsContractAddress: '0x0b54a094b877a25bdc95b4431eaa1e2206b1ddfe',
+    treasuryContractAddress: '0x3d531a80c05099c71b02585031f86a2988e0caca',
     x2EarnRewardsPoolContractAddress:
-        '0x5F8f86B8D0Fa93cdaE20936d150175dF0205fB38', // X2Earn Rewards Pool
-    tokenAuctionContractAddress: '', // Token Auction
-    nodeManagementContractAddress: '', // Node Management
+        '0x2d2a2207c68a46fc79325d7718e639d1047b0d8b',
     veBetterPassportContractAddress:
-        '0x63c061a2753e84635a22ff05954e1687f104f002', // VeBetter Passport
+        '0x592c756df7a5d39de1735030e8b9c18b7417e6c4',
+    tokenAuctionContractAddress: '', // Token Auction
     b3trGovernorLibraries: {
-        governorClockLogicAddress: '0x4104385CDA4be4eed954E47CeeB261Df50EFcA63',
-        governorConfiguratorAddress:
-            '0x2E096fA388Ed7dFE4209bc7aB2d577DB73aB6D61',
-        governorDepositLogicAddress:
-            '0x207769d88579066211a55F7CbB9f727a2B907E5C',
-        governorFunctionRestrictionsLogicAddress:
-            '0xB344b0D08Bc7f458BA4c5C5436b2BeE1bc1a9496',
-        governorProposalLogicAddressAddress:
-            '0xEbb62a3a1b38B8e42d88CE40dc89dfAfB5ab51FB',
-        governorQuorumLogicAddress:
-            '0x5F18ad4dCFb536fb1e4432249A8314788Af21b6A',
-        governorStateLogicAddress: '0xAB952E5a5de8B7a00CFb4ad20C805A0d05eDeA30',
-        governorVotesLogicAddress: '0xcf04A7454C729B15C2E22168A7ad298076f9a1D8',
+        governorClockLogicAddress: "0xf33d6fb7d7b26cfc68fc57a9a52b7358ba1b4705",
+        governorConfiguratorAddress: "0xc72b2e854d48ef6a47badb8c13548b15a34022c0",
+        governorDepositLogicAddress: "0x5bfda0abb9fdd8600f02c7defca34866b5560c6e",
+        governorFunctionRestrictionsLogicAddress: "0xc87376cbe6c02e96129f24a5b1167b1d1b74dcae",
+        governorProposalLogicAddressAddress: "0x85a89965a4791d13ccb2e4fa6a9f28a4ec5308bb",
+        governorQuorumLogicAddress: "0x8d54c011aff47941ec22f1ba9488f572a183d0d6",
+        governorStateLogicAddress: "0x6f727492eb384b93c7f81bb304917d8e8bc70c40",
+        governorVotesLogicAddress: "0xbff2d3f8e2422992cdf1347f8de93cbb02c0bb7e",
     }, // B3TR Governor Libraries
     passportLibraries: {
-        passportChecksLogicAddress:
-            '0xEA6F50e88C4dbd87360567d062328943bc49Aae5',
-        passportConfiguratorAddress:
-            '0x1773B6FCBb53b4A04663Dfe51Dd59ebf969514c4',
-        passportEntityLogicAddress:
-            '0xea6B8c85CD6A48c311cCe03B48F369dB5C3B978a',
-        passportDelegationLogicAddress:
-            '0x414EC83f6e706f2C6f4326e0204Af42f7874De23',
-        passportPersonhoodLogicAddress:
-            '0xFB2b8b900Ece2A534A6BE78bAFC2d054C09B75b0',
-        passportPoPScoreLogicAddress:
-            '0x01a488CF0f941098bE0e7dB14DE6046F1b51C164',
-        passportSignalingLogicAddress:
-            '0xd2599f2BBf3E3f45344d3FDFb1680f784eC3C911',
-        passportWhitelistAndBlacklistLogicAddress:
-            '0x1596e69Bd430388A860CEf94721aB39a12bcC1d1',
+        passportChecksLogicAddress: "0x252c2ea0e7cae88b8b7c73861b07c2b97b12aa76",
+        passportConfiguratorAddress: "0x568fcb3479989c4113dc19e47d204031b1223b37",
+        passportEntityLogicAddress: "0xfb511e92eb27f5f448fa0f06b9e46626a80926fc",
+        passportDelegationLogicAddress: "0xd4bc0be20de99249b3d1945ec500ab95c816dd5f",
+        passportPersonhoodLogicAddress: "0xada28d485d0972f45ae0e50c4458244618ed7a09",
+        passportPoPScoreLogicAddress: "0x0ba56426b5716e9b92b38bd24f7c6cb122d3505d",
+        passportSignalingLogicAddress: "0x68482ad6d4546bccd68862d345ef57facd2e02c6",
+        passportWhitelistAndBlacklistLogicAddress: "0x45feba7af9219ad26967b2db82d6ef9297219881",
     }, // Passport Libraries
     b3trMultiSigAddress: '0x4Dd13fcb7b4f7DC19048ce0d23aAEbbDB3f3a1d9', // B3TR MultiSig //TODO: Do we need this?
     stargateNFTContractAddress: '0x1856c533ac2d94340aaa8544d35a5c1d4a21dee7', // Stargate NFT
     grantsManagerContractAddress: '0x055d20914657834c914d7c44bf65b566ab4b45a2', // Grants Manager
     relayerRewardsPoolContractAddress:
-        '0x0000000000000000000000000000000000000000', // Relayer Rewards Pool
-    dbaPoolContractAddress: '0x0000000000000000000000000000000000000000', // DBA Pool
+        '0x92b5a7484970d9b2ad981e8135ff14e6f996dc04', // Relayer Rewards Pool
+    dbaPoolContractAddress: '0x328710f4925c3e4c04961882b96c50cc7cd9d958', // DBA Pool
     xAllocationVotingLibraries: {
-        autoVotingLogicAddress: '0x0000000000000000000000000000000000000000',
+        autoVotingLogicAddress: '0x6a69d971f78fcc31d79bc1216f86c212def17b25',
     },
 
     //===============EXTERNAL CONTRACTS===============
