@@ -13,5 +13,6 @@ export const MAINNET_URLS = [
     'https://vethor-node.vechain.com',
     'https://mainnet.veblocks.net',
     'https://mainnet.vecha.in',
+    'https://node-mainnet.vechain.energy',
     MAINNET_URL,
 ];
